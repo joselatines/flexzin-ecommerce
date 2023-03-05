@@ -17,6 +17,15 @@ const ProductSchema = new mongoose.Schema<IProduct>({
 	images: { type: [String], required: true },
 });
 
+ProductSchema.set('toJSON', {
+	transform: (document, returnedObject) => {
+		returnedObject.id = returnedObject._id;
+
+		delete returnedObject._id;
+		delete returnedObject.__v;
+	},
+});
+
 export type { IProduct };
 export default mongoose.models.Product ||
 	mongoose.model('Product', ProductSchema);

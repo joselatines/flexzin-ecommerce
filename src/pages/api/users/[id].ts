@@ -1,6 +1,6 @@
 import { IApiRes } from '@/interfaces/api';
 import type { NextApiRequest, NextApiResponse } from 'next';
-import Product from '@/database/models/Product';
+import User from '@/database/models/User';
 import dbConnect from '@/database/dbConnection';
 
 export default async function handler(
@@ -15,14 +15,14 @@ export default async function handler(
 	switch (method) {
 		case 'GET':
 			try {
-				const product = await Product.findById(id).lean().exec();
+				const product = await User.findById(id).lean().exec();
 
 				if (product) {
 					res
 						.status(200)
-						.json({ statusCode: 200, data: product, msg: 'Product founded' });
+						.json({ statusCode: 200, data: product, msg: 'User founded' });
 				} else {
-					res.status(404).json({ statusCode: 404, msg: 'Product not found' });
+					res.status(404).json({ statusCode: 404, msg: 'User not found' });
 				}
 			} catch (error) {
 				console.log(error);
@@ -38,22 +38,22 @@ export default async function handler(
 
 		case 'PUT':
 			try {
-				const updatedProduct = await Product.findByIdAndUpdate(id, body, {
+				const updatedUser = await User.findByIdAndUpdate(id, body, {
 					new: true,
 				})
 					.lean()
 					.exec();
 
-				if (updatedProduct) {
+				if (updatedUser) {
 					res
 						.status(200)
 						.json({
 							statusCode: 200,
-							data: updatedProduct,
-							msg: 'Product found successfully',
+							data: updatedUser,
+							msg: 'User found successfully',
 						});
 				} else {
-					res.status(404).json({ statusCode: 404, msg: 'Product not found' });
+					res.status(404).json({ statusCode: 404, msg: 'User not found' });
 				}
 			} catch (error) {
 				console.log(error);
@@ -69,16 +69,16 @@ export default async function handler(
 
 		case 'DELETE':
 			try {
-				const deletedProduct = await Product.findByIdAndDelete(id)
+				const deletedProduct = await User.findByIdAndDelete(id)
 					.lean()
 					.exec();
 
 				if (deletedProduct) {
 					res
 						.status(200)
-						.json({ msg: 'Product deleted successfully', statusCode: 200 });
+						.json({ msg: 'User deleted successfully', statusCode: 200 });
 				} else {
-					res.status(404).json({ statusCode: 404, msg: 'Product not found' });
+					res.status(404).json({ statusCode: 404, msg: 'User not found' });
 				}
 			} catch (error) {
 				console.log(error);
