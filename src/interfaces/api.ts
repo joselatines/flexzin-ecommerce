@@ -1,6 +1,8 @@
 interface IApiRes {
-	data: [] | {};
+	data?: [] | {} | null;
 	statusCode: number;
+	msg: string;
+	error?: any;
 }
 
 export type { IApiRes };
