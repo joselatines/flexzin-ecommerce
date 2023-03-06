@@ -26,6 +26,7 @@ ProductSchema.set('toJSON', {
 	},
 });
 
+export { ProductSchema };
 export type { IProduct };
 export default mongoose.models.Product ||
 	mongoose.model('Product', ProductSchema);
