@@ -1,21 +1,10 @@
-import CartItem from '@/components/CartPage/CartItem';
-import { CartOrderSummary } from '@/components/CartPage/CartOrderSummary';
-import { IProduct } from '@/database/models/Product';
-import {
-	Box,
-	Flex,
-	Heading,
-	HStack,
-	Link,
-	Stack,
-	useColorModeValue as mode,
-} from '@chakra-ui/react';
+import ShippingForm from '@/components/ShippingForm';
 
 function CheckingPage({ products }: any) {
 	return (
 		<>
 			<h1>Checking order</h1>
-	
+			<ShippingForm />
 		</>
 	);
 }

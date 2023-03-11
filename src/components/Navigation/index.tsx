@@ -8,6 +8,7 @@ import {
 	IconButton,
 	useBreakpointValue,
 } from '@chakra-ui/react';
+import NextLink from 'next/link'
 import { FiMenu } from 'react-icons/fi';
 
 function Navigation() {
@@ -26,7 +27,9 @@ function Navigation() {
 									))}
 								</ButtonGroup>
 								<HStack spacing='3'>
-									<Button variant='ghost'><a href="/cart">Carrito</a> </Button>
+									<Button variant='ghost'>
+										<NextLink href='/cart'>Carrito</NextLink>{' '}
+									</Button>
 									<Button variant='primary'>Sign up</Button>
 								</HStack>
 							</Flex>
