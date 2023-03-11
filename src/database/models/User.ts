@@ -24,6 +24,8 @@ const UserSchema = new mongoose.Schema<IUser>({
 });
 
 UserSchema.set('toJSON', {
+	virtuals: true,
+	versionKey: false,
 	transform: (document, returnedObject) => {
 		returnedObject.id = returnedObject._id;
 

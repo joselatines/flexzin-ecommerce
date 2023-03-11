@@ -1,5 +1,7 @@
 import mongoose from 'mongoose';
 
+// todo: hacer lo del stock
+
 interface IProduct {
 	title: string;
 	id: string;
@@ -26,7 +28,6 @@ ProductSchema.set('toJSON', {
 	},
 });
 
-export { ProductSchema };
 export type { IProduct };
 export default mongoose.models.Product ||
 	mongoose.model('Product', ProductSchema);

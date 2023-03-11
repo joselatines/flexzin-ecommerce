@@ -1,22 +1,19 @@
 import mongoose from 'mongoose';
-import { ProductSchema } from './Product';
-import { IUser } from './User';
 
 interface IOrder {
+	user_id: string;
 	products_ids: string[];
-	user_id: IUser;
 	total_usd: number;
 	payment_method: 'transfer' | 'cash' | 'binance';
 	date: string;
 }
 
 const OrderSchema = new mongoose.Schema({
-	products_ids: [
-		{
-			type: ProductSchema,
-			ref: 'Product',
-		},
-	],
+	products_ids: {
+		type: [mongoose.Schema.Types.ObjectId],
+		ref: 'Product',
+		required: true,
+	},
 
 	user_id: {
 		type: mongoose.Schema.Types.ObjectId,

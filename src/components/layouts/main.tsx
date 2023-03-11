@@ -13,7 +13,13 @@ export default function MainLayout({ children }: IProps) {
 				<meta name='viewport' content='width=device-width, initial-scale=1' />
 				<link rel='icon' href='/favicon.ico' />
 			</Head>
-			<main>{children}</main>
+			<>
+				<nav>Navegacion</nav>
+				<aside>sidebar</aside>
+				<aside>publicidad</aside>
+				<main>{children}</main>
+				<footer>footer</footer>
+			</>
 		</>
 	);
 }

@@ -1,0 +1,21 @@
+GET http://localhost:3000/api/orders
+
+###
+
+POST http://localhost:3000/api/orders
+content-type: application/json
+
+{
+  "user_id": "64051da829b6801b84073666",
+	"payment_method": "transfer",
+  "products": [
+		{
+			"id": "6406838b0ffd6a2414bc7e53",
+			"title": "probando title",
+			"price": 55,
+			"qty": 0,
+			"description": "asdfasdfasdfasdf",
+			"images": "string[]"
+		}
+	]
+}

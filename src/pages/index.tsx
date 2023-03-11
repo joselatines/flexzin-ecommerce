@@ -1,5 +1,7 @@
 import MainLayout from '@/components/layouts/main';
+import ProductCard from '@/components/ProductCard';
 import { IProduct } from '@/database/models/Product';
+import { Flex } from '@chakra-ui/react';
 
 interface IProps {
 	products: IProduct[];
@@ -10,9 +12,11 @@ export default function Home({ products }: IProps) {
 		<MainLayout>
 			<>
 				Home page
-				{products.map((product, index) => (
-					<div key={index}>{product.title}</div>
-				))}
+				<Flex gap={6}>
+					{products.map(p => (
+						<ProductCard key={p.id} product={p} />
+					))}
+				</Flex>
 			</>
 		</MainLayout>
 	);
