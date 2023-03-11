@@ -1,4 +1,6 @@
+import { Box, Flex } from '@chakra-ui/react';
 import Head from 'next/head';
+import Navigation from '../Navigation';
 
 interface IProps {
 	children: JSX.Element;
@@ -13,13 +15,35 @@ export default function MainLayout({ children }: IProps) {
 				<meta name='viewport' content='width=device-width, initial-scale=1' />
 				<link rel='icon' href='/favicon.ico' />
 			</Head>
-			<>
-				<nav>Navegacion</nav>
-				<aside>sidebar</aside>
-				<aside>publicidad</aside>
-				<main>{children}</main>
-				<footer>footer</footer>
-			</>
+
+			<Flex flexDirection='column' height='100vh'>
+				{/* Navbar */}
+				<Box bg='blue.500' color='white' p={4}>
+					<Navigation />
+				</Box>
+
+				<Flex flexGrow={1}>
+					{/* Aside 1 */}
+					<Box bg='gray.200' flexBasis='200px' p={4}>
+						Aside 1
+					</Box>
+
+					{/* Main content */}
+					<Box bg='white' as='main' flexGrow={1} p={4}>
+						{children}
+					</Box>
+
+					{/* Aside 2 */}
+					{/* 	<Box bg='gray.200' flexBasis='200px' p={4}>
+						Aside 2
+					</Box> */}
+				</Flex>
+
+				{/* Footer */}
+				<Box bg='blue.500' color='white' p={4}>
+					Footer
+				</Box>
+			</Flex>
 		</>
 	);
 }

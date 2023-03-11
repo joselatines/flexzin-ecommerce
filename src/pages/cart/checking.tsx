@@ -1,21 +1,21 @@
-import MainLayout from '@/components/layouts/main';
-import ProductCard from '@/components/ProductCard';
+import CartItem from '@/components/CartPage/CartItem';
+import { CartOrderSummary } from '@/components/CartPage/CartOrderSummary';
 import { IProduct } from '@/database/models/Product';
-import { Flex } from '@chakra-ui/react';
+import {
+	Box,
+	Flex,
+	Heading,
+	HStack,
+	Link,
+	Stack,
+	useColorModeValue as mode,
+} from '@chakra-ui/react';
 
-interface IProps {
-	products: IProduct[];
-}
-
-export default function Home({ products }: IProps) {
+function CheckingPage({ products }: any) {
 	return (
 		<>
-			Home page
-			<Flex gap={6}>
-				{products.map(p => (
-					<ProductCard key={p.id} product={p} />
-				))}
-			</Flex>
+			<h1>Checking order</h1>
+	
 		</>
 	);
 }
@@ -35,3 +35,5 @@ export async function getStaticProps() {
 		};
 	}
 }
+
+export default CheckingPage;

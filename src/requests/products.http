@@ -6,9 +6,11 @@ POST http://localhost:3000/api/products
 content-type: application/json
 
 {
-	"title": "probando title",
-	"price": 55,
-	"qty": 0,
-	"description": "asdfasdfasdfasdf",
-	"images": "string[]"
+	"title": "Yeezys 350",
+	"price": 505,
+	"salePrice": 20,
+	"rating": 8,
+	"qty": 10,
+	"description": "top quality",
+	"images": "https://images.unsplash.com/photo-1566138702430-e9de69726fe3?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8eWVlenklMjAzNTB8ZW58MHx8MHx8&w=1000&q=80"
 }

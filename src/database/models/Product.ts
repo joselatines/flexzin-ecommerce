@@ -6,16 +6,22 @@ interface IProduct {
 	title: string;
 	id: string;
 	price: number;
+	salePrice: number;
+	rating: number;
 	qty: number;
 	description?: string;
 	images: string[];
+	currency: string;
 }
 
 const ProductSchema = new mongoose.Schema<IProduct>({
 	title: { type: String, required: true },
 	description: { type: String, required: false },
 	price: { type: Number, required: true },
+	salePrice: { type: Number, required: true },
+	rating: { type: Number, required: true },
 	qty: { type: Number, required: true },
+	currency: { type: String, required: true },
 	images: { type: [String], required: true },
 });
 
