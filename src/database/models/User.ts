@@ -1,55 +1,55 @@
-import mongoose from 'mongoose';
+import mongoose, { Document } from 'mongoose';
 
-interface ICartItem {
-	id: string;
-	qty: number;
+interface ICartItem extends Document {
+  id: string;
+  qty: number;
 }
 
-interface IUser {
-	email: string;
-	id: string;
-	username: string;
-	password: string;
-	cart: ICartItem[];
+interface IUser extends Document {
+  email: string;
+  id: string;
+  username: string;
+  password: string;
+  cart: ICartItem[];
 }
 
-const CartItemSchema = new mongoose.Schema<ICartItem>({
-	id: {
-		type: mongoose.Schema.Types.ObjectId,
-		required: true,
-		ref: 'Product',
-	},
-	qty: { type: Number, default: 1 },
+const cartItemSchema = new mongoose.Schema<ICartItem>({
+  _id: {
+    type: mongoose.Schema.Types.ObjectId,
+    required: true,
+    ref: 'Product',
+  },
+  qty: { type: Number, default: 1 },
 });
 
-const UserSchema = new mongoose.Schema<IUser>({
-	email: {
-		type: String,
-		required: true,
-		unique: true,
-	},
-	username: {
-		type: String,
-		required: true,
-	},
-	password: {
-		type: String,
-		required: true,
-	},
-	cart: { type: [CartItemSchema], required: true, default: [] },
+const userSchema = new mongoose.Schema<IUser>({
+  email: {
+    type: String,
+    required: true,
+    unique: true,
+  },
+  username: {
+    type: String,
+    required: true,
+  },
+  password: {
+    type: String,
+    required: true,
+  },
+  cart: { type: [cartItemSchema], required: true, default: [] },
 });
 
-UserSchema.set('toJSON', {
-	virtuals: true,
-	versionKey: false,
-	transform: (document, returnedObject) => {
-		returnedObject.id = returnedObject._id;
+userSchema.set('toJSON', {
+  virtuals: true,
+  versionKey: false,
+  transform: (document, returnedObject) => {
+    returnedObject.id = returnedObject._id;
 
-		delete returnedObject._id;
-		delete returnedObject.__v;
-	},
+    delete returnedObject._id;
+    delete returnedObject.__v;
+  },
 });
 
-export { UserSchema };
+export { userSchema };
 export type { IUser };
-export default mongoose.models.User || mongoose.model('User', UserSchema);
+export default mongoose.models.User || mongoose.model<IUser>('User', userSchema);

@@ -12,6 +12,7 @@ interface IProduct {
 	description?: string;
 	images: string[];
 	currency: 'USD' | 'BS';
+	reviewsCount: number;
 }
 
 const ProductSchema = new mongoose.Schema<IProduct>({
@@ -23,6 +24,7 @@ const ProductSchema = new mongoose.Schema<IProduct>({
 	qty: { type: Number, required: true },
 	currency: { type: String, required: true },
 	images: { type: [String], required: true },
+	reviewsCount: { type: Number, required: true, default: 5 },
 });
 
 ProductSchema.set('toJSON', {

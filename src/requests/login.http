@@ -1,0 +1,11 @@
+GET http://localhost:3000/api/auth/login
+
+###
+
+POST http://localhost:3000/api/auth/login
+content-type: application/json
+
+{
+ "email": "probandito@gmail.com",
+ "password": "123adfadsf45"
+}

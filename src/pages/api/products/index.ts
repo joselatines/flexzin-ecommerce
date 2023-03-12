@@ -37,12 +37,15 @@ export default async function handler(
 				if (body.currency !== 'USD' || body.currency !== 'BS') {
 					throw new Error('Currency must be USD or BS');
 				}
-        
-				const newProduct = await Product.create(body);
 
+				const newProduct = await Product.create(body);
+				
 				res.status(201).json({
 					statusCode: 201,
-					data: newProduct,
+					data: {
+						reviewsCount: Math.floor(Math.random() * 20 + 1),
+						...newProduct,
+					},
 					msg: 'Product created',
 				});
 			} catch (error) {
