@@ -1,6 +1,6 @@
 import { Box, Flex } from '@chakra-ui/react';
 import Head from 'next/head';
-import Navigation from '../Navigation';
+import Navigation from '../shared/Navigation';
 
 interface IProps {
 	children: JSX.Element;

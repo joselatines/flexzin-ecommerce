@@ -26,18 +26,21 @@ export default async function handler(
 				}
 			} catch (error) {
 				console.log(error);
-				res
-					.status(500)
-					.json({
-						statusCode: 500,
-						msg: 'Internal Server Error',
-						error: error,
-					});
+				res.status(500).json({
+					statusCode: 500,
+					msg: 'Internal Server Error',
+					error: error,
+				});
 			}
 			break;
 
 		case 'PUT':
 			try {
+				// IF NOT USD NEITHER BS
+				if (body.currency !== 'USD' || body.currency !== 'BS') {
+					throw new Error('Currency must be USD or BS');
+				}
+
 				const updatedProduct = await Product.findByIdAndUpdate(id, body, {
 					new: true,
 				})
@@ -45,25 +48,21 @@ export default async function handler(
 					.exec();
 
 				if (updatedProduct) {
-					res
-						.status(200)
-						.json({
-							statusCode: 200,
-							data: updatedProduct,
-							msg: 'Product found successfully',
-						});
+					res.status(200).json({
+						statusCode: 200,
+						data: updatedProduct,
+						msg: 'Product found successfully',
+					});
 				} else {
 					res.status(404).json({ statusCode: 404, msg: 'Product not found' });
 				}
 			} catch (error) {
 				console.log(error);
-				res
-					.status(500)
-					.json({
-						statusCode: 500,
-						msg: 'Internal Server Error',
-						error: error,
-					});
+				res.status(500).json({
+					statusCode: 500,
+					msg: 'Internal Server Error',
+					error: error,
+				});
 			}
 			break;
 
@@ -82,13 +81,11 @@ export default async function handler(
 				}
 			} catch (error) {
 				console.log(error);
-				res
-					.status(500)
-					.json({
-						statusCode: 500,
-						msg: 'Internal Server Error',
-						error: error,
-					});
+				res.status(500).json({
+					statusCode: 500,
+					msg: 'Internal Server Error',
+					error: error,
+				});
 			}
 			break;
 

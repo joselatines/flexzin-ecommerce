@@ -21,10 +21,10 @@ interface IProps {
 }
 
 function ProductCard({ product }: IProps) {
-	const { title, images, price} = product;
-	// salePrice, rating 
+	const { title, images, price, salePrice, rating, currency } = product;
+
 	return (
-		<Stack spacing={{ base: '4', md: '5' }} >
+		<Stack spacing={{ base: '4', md: '5' }}>
 			<Box position='relative'>
 				<AspectRatio ratio={4 / 3}>
 					<Image
@@ -50,12 +50,12 @@ function ProductCard({ product }: IProps) {
 					>
 						{title}
 					</Text>
-					<PriceTag price={price} salePrice={200} currency='USD' />
+					<PriceTag price={price} salePrice={salePrice} currency={currency} />
 				</Stack>
 				<HStack>
-					<Rating defaultValue={0} size='sm' />
+					<Rating defaultValue={rating} size='sm' />
 					<Text fontSize='sm' color={useColorModeValue('gray.600', 'gray.400')}>
-						12 Reviews
+						{`${Math.floor(Math.random() * 20 + 1)} Reviews`}
 					</Text>
 				</HStack>
 			</Stack>
@@ -63,13 +63,6 @@ function ProductCard({ product }: IProps) {
 				<Button colorScheme='blue' width='full'>
 					Add to cart
 				</Button>
-				<Link
-					textDecoration='underline'
-					fontWeight='medium'
-					color={useColorModeValue('gray.600', 'gray.400')}
-				>
-					Quick shop
-				</Link>
 			</Stack>
 		</Stack>
 	);

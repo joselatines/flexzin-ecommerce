@@ -36,7 +36,7 @@ export default async function handler(
 			try {
 				const { password } = body;
 				const passwordHashed = await bcrypt.hash(password, 10);
-
+				
 				const newUser = await User.create({
 					...body,
 					password: passwordHashed,

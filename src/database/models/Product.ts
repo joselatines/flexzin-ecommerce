@@ -11,7 +11,7 @@ interface IProduct {
 	qty: number;
 	description?: string;
 	images: string[];
-	currency: string;
+	currency: 'USD' | 'BS';
 }
 
 const ProductSchema = new mongoose.Schema<IProduct>({

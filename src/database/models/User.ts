@@ -1,11 +1,26 @@
 import mongoose from 'mongoose';
 
+interface ICartItem {
+	id: string;
+	qty: number;
+}
+
 interface IUser {
 	email: string;
 	id: string;
 	username: string;
 	password: string;
+	cart: ICartItem[];
 }
+
+const CartItemSchema = new mongoose.Schema<ICartItem>({
+	id: {
+		type: mongoose.Schema.Types.ObjectId,
+		required: true,
+		ref: 'Product',
+	},
+	qty: { type: Number, default: 1 },
+});
 
 const UserSchema = new mongoose.Schema<IUser>({
 	email: {
@@ -21,6 +36,7 @@ const UserSchema = new mongoose.Schema<IUser>({
 		type: String,
 		required: true,
 	},
+	cart: { type: [CartItemSchema], required: true, default: [] },
 });
 
 UserSchema.set('toJSON', {
