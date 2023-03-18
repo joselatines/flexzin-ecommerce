@@ -18,7 +18,6 @@ export default async function loginHandler(
 	try {
 		// Find user by email
 		const user = await User.findOne({ email }).exec();
-		console.log('user: ', user);
 
 		if (!user) {
 			return res.status(404).json({
@@ -59,7 +58,7 @@ export default async function loginHandler(
 		}
 
 		// Set cookie with token
-		const serialized = serialize(tokenName, token, {
+		const serialized = serialize(tokenName, token.toString(), {
 			httpOnly: true,
 			secure: process.env.NODE_ENV === 'production',
 			sameSite: 'strict',
@@ -69,11 +68,11 @@ export default async function loginHandler(
 
 		res.setHeader('Set-Cookie', serialized);
 		return res.status(200).json({
-			statusCode: 202,
+			statusCode: 200,
 			msg: 'Login successfully',
 		});
 	} catch (error) {
-		console.log(error);
+		console.log('⚠️: ', { error });
 		return res.status(500).json({ statusCode: 500, msg: 'Server error' });
 	}
 }
