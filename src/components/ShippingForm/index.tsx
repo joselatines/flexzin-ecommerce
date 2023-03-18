@@ -24,7 +24,8 @@ export default function ShippingForm() {
 		};
 
 		try {
-			const response = await fetch(`http://localhost:3000/api/orders`, {
+			const apiURI = process.env.NEXT_PUBLIC_APP_URI
+			const response = await fetch(`${apiURI}/api/orders`, {
 				method: 'POST',
 				headers: {
 					'Content-Type': 'application/json',

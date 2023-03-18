@@ -18,7 +18,7 @@ export default function MainLayout({ children }: IProps) {
 
 			<Flex flexDirection='column' height='100vh'>
 				{/* Navbar */}
-				<Box bg='blue.500' color='white' p={4}>
+				<Box p={4}>
 					<Navigation />
 				</Box>
 
