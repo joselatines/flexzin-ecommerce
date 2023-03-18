@@ -55,7 +55,8 @@ function ShoppingCartPage({ products }: any) {
 
 export async function getStaticProps() {
 	try {
-		const res = await fetch('http://localhost:3000/api/products');
+		const apiURI = process.env.NEXT_PUBLIC_APP_URI
+		const res = await fetch(`${apiURI}/api/products`);
 		const { data } = await res.json();
 
 		return {
