@@ -1,23 +1,20 @@
-import { NextRequest, NextResponse } from 'next/server';
+import {  NextResponse } from 'next/server';
 import { jwtVerify } from 'jose';
 
 export async function middleware(request: any) {
 	const tokenName = process.env.TOKEN_NAME;
 
 	if (!tokenName) {
-		return NextResponse.redirect(new URL('/login', request.url));
+		return NextResponse.redirect(new URL('auth/login', request.url));
 	}
 
-	const jwt = request.cookies.get(tokenName);
-	
-	console.log('jwt: ', jwt);
+	const jwt = await request.cookies.get(tokenName);
 
-
-	if (!jwt) return NextResponse.redirect(new URL('/login', request.url));
+	if (!jwt) return NextResponse.redirect(new URL('auth/login', request.url));
 
 	// this condition avoid to show the login page if the user is logged in
 	if (jwt) {
-		if (request.nextUrl.pathname.includes('/login')) {
+		if (request.nextUrl.pathname.includes('auth/login')) {
 			try {
 				await jwtVerify(jwt, new TextEncoder().encode('secret'));
 				return NextResponse.redirect(new URL('/cart', request.url));
@@ -29,13 +26,14 @@ export async function middleware(request: any) {
 
 	try {
 		const { payload } = await jwtVerify(
-			jwt,
+			jwt.value,
 			new TextEncoder().encode('secret')
 		);
 		console.log({ payload });
 		return NextResponse.next();
 	} catch (error) {
-		return NextResponse.redirect(new URL('/login', request.url));
+		console.log({ error });
+		return NextResponse.redirect(new URL('auth/login', request.url));
 	}
 }
 

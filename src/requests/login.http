@@ -1,4 +1,4 @@
-GET http://localhost:3000/api/auth/login
+GET http://localhost:3000/api/auth/logout
 
 ###
 
@@ -6,6 +6,6 @@ POST http://localhost:3000/api/auth/login
 content-type: application/json
 
 {
- "email": "probandito@gmail.com",
- "password": "123adfadsf45"
+ "email": "joselatines@gmail.com",
+ "password": "mainroott"
 }
