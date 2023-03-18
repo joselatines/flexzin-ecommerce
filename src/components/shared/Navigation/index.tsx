@@ -8,8 +8,9 @@ import {
 	IconButton,
 	useBreakpointValue,
 } from '@chakra-ui/react';
-import NextLink from 'next/link'
+import NextLink from 'next/link';
 import { FiMenu } from 'react-icons/fi';
+import SessionManager from './SessionManager';
 
 function Navigation() {
 	const isDesktop = useBreakpointValue({ base: false, lg: true });
@@ -30,7 +31,7 @@ function Navigation() {
 									<Button variant='ghost'>
 										<NextLink href='/cart'>Carrito</NextLink>{' '}
 									</Button>
-									<Button variant='primary'>Sign up</Button>
+									<SessionManager />
 								</HStack>
 							</Flex>
 						) : (

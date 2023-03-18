@@ -25,7 +25,7 @@ export default async function handler(
 					res.status(404).json({ statusCode: 404, msg: 'Product not found' });
 				}
 			} catch (error) {
-				console.log(error);
+				console.log('⚠️: ', { error });
 				res.status(500).json({
 					statusCode: 500,
 					msg: 'Internal Server Error',
@@ -57,7 +57,7 @@ export default async function handler(
 					res.status(404).json({ statusCode: 404, msg: 'Product not found' });
 				}
 			} catch (error) {
-				console.log(error);
+				console.log('⚠️: ', { error });
 				res.status(500).json({
 					statusCode: 500,
 					msg: 'Internal Server Error',
@@ -80,7 +80,7 @@ export default async function handler(
 					res.status(404).json({ statusCode: 404, msg: 'Product not found' });
 				}
 			} catch (error) {
-				console.log(error);
+				console.log('⚠️: ', { error });
 				res.status(500).json({
 					statusCode: 500,
 					msg: 'Internal Server Error',

@@ -1,7 +1,7 @@
 import { Button, Input, InputGroup, InputRightElement } from '@chakra-ui/react';
 import { useState } from 'react';
 
-function PasswordInput({ setPassword }: any) {
+function PasswordInput({ handleChange, value }: any) {
 	const [show, setShow] = useState(false);
 	const handleClick = () => setShow(!show);
 
@@ -11,7 +11,10 @@ function PasswordInput({ setPassword }: any) {
 				pr='4.5rem'
 				type={show ? 'text' : 'password'}
 				placeholder='Enter password'
-				onChange={setPassword}
+				onChange={handleChange}
+				value={value}
+				name='password'
+				required
 			/>
 			<InputRightElement width='4.5rem'>
 				<Button h='1.75rem' size='sm' onClick={handleClick}>

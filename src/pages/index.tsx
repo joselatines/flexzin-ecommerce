@@ -12,8 +12,8 @@ export default function Home({ products }: IProps) {
 		<>
 			Home page
 			<Flex gap={6}>
-				{products.map(p => (
-					<ProductCard key={p.id} product={p} />
+				{products.map((p, index) => (
+					<ProductCard key={index} product={p} />
 				))}
 			</Flex>
 		</>

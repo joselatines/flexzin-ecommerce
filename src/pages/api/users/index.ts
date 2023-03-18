@@ -34,6 +34,7 @@ export default async function handler(
 
 		case 'POST':
 			try {
+				
 				const { password } = body;
 				const passwordHashed = await bcrypt.hash(password, 10);
 				

@@ -1,15 +1,10 @@
-import {
-	FormControl,
-	FormLabel,
-	Input,
-	Button,
-	useToast,
-} from '@chakra-ui/react';
+import { useCustomToast } from '@/lib/hooks/useCustomToast';
+import { FormControl, FormLabel, Input, Button } from '@chakra-ui/react';
 import { useRouter } from 'next/router';
 
 export default function ShippingForm() {
 	const API_URI = process.env.NEXT_PUBLIC_API_URI;
-	const toast = useToast();
+	const showToast = useCustomToast();
 	const router = useRouter();
 
 	const createOrder = async () => {
@@ -38,27 +33,22 @@ export default function ShippingForm() {
 			});
 
 			if (!response.ok) {
-				toast({
-					position: 'top',
+				showToast({
 					title: 'Orden NO enviada',
 					description: 'Algo salió mal',
 					status: 'error',
-					duration: 5000,
-					isClosable: true,
+			
 				});
 				throw new Error(`HTTP error! status: ${response.status}`);
 			}
 
 			const data = await response.json();
 
-			toast({
-				position: 'top',
+			showToast({
 				title: 'Orden enviada',
 				description:
 					'Revisa tu WhatsApp y tu correo para conocer mas acerca tu orden',
 				status: 'success',
-				duration: 5000,
-				isClosable: true,
 			});
 
 			return data;

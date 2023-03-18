@@ -25,14 +25,12 @@ export default async function handler(
 					res.status(404).json({ statusCode: 404, msg: 'User not found' });
 				}
 			} catch (error) {
-				console.log(error);
-				res
-					.status(500)
-					.json({
-						statusCode: 500,
-						msg: 'Internal Server Error',
-						error: error,
-					});
+				console.log('⚠️: ', { error });
+				res.status(500).json({
+					statusCode: 500,
+					msg: 'Internal Server Error',
+					error: error,
+				});
 			}
 			break;
 
@@ -45,33 +43,27 @@ export default async function handler(
 					.exec();
 
 				if (updatedUser) {
-					res
-						.status(200)
-						.json({
-							statusCode: 200,
-							data: updatedUser,
-							msg: 'User found successfully',
-						});
+					res.status(200).json({
+						statusCode: 200,
+						data: updatedUser,
+						msg: 'User found successfully',
+					});
 				} else {
 					res.status(404).json({ statusCode: 404, msg: 'User not found' });
 				}
 			} catch (error) {
-				console.log(error);
-				res
-					.status(500)
-					.json({
-						statusCode: 500,
-						msg: 'Internal Server Error',
-						error: error,
-					});
+				console.log('⚠️: ', { error });
+				res.status(500).json({
+					statusCode: 500,
+					msg: 'Internal Server Error',
+					error: error,
+				});
 			}
 			break;
 
 		case 'DELETE':
 			try {
-				const deletedProduct = await User.findByIdAndDelete(id)
-					.lean()
-					.exec();
+				const deletedProduct = await User.findByIdAndDelete(id).lean().exec();
 
 				if (deletedProduct) {
 					res
@@ -81,14 +73,12 @@ export default async function handler(
 					res.status(404).json({ statusCode: 404, msg: 'User not found' });
 				}
 			} catch (error) {
-				console.log(error);
-				res
-					.status(500)
-					.json({
-						statusCode: 500,
-						msg: 'Internal Server Error',
-						error: error,
-					});
+				console.log('⚠️: ', { error });
+				res.status(500).json({
+					statusCode: 500,
+					msg: 'Internal Server Error',
+					error: error,
+				});
 			}
 			break;
 
