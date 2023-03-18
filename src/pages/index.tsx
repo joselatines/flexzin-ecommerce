@@ -1,4 +1,3 @@
-import MainLayout from '@/components/layouts/main';
 import ProductCard from '@/components/ProductCard';
 import { IProduct } from '@/database/models/Product';
 import { Flex } from '@chakra-ui/react';
