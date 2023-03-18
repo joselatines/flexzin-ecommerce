@@ -6,7 +6,7 @@ import { useCustomToast } from '@/lib/hooks/useCustomToast';
 
 function SessionManager() {
 	const [isLoggedIn, setIsLoggedIn] = useState(false);
-	const API_URI = process.env.NEXT_PUBLIC_API_URI;
+	const API_URI = process.env.NEXT_PUBLIC_APP_URI;
 	const showToast = useCustomToast();
 	const router = useRouter();
 
@@ -19,7 +19,7 @@ function SessionManager() {
 		// perform logout logic here, such as clearing user session data
 		setIsLoggedIn(false);
 		try {
-			const response = await axios.get(`${API_URI}/auth/logout`);
+			const response = await axios.get(`${API_URI}/api/auth/logout`);
 
 			if (response.status !== 200)
 				showToast({

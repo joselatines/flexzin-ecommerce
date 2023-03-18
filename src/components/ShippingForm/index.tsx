@@ -3,7 +3,6 @@ import { FormControl, FormLabel, Input, Button } from '@chakra-ui/react';
 import { useRouter } from 'next/router';
 
 export default function ShippingForm() {
-	const API_URI = process.env.NEXT_PUBLIC_API_URI;
 	const showToast = useCustomToast();
 	const router = useRouter();
 

@@ -1,4 +1,4 @@
-GET http://localhost:3000/api/products
+GET https://flexzin-ecommerce.vercel.app/api/products
 
 ###
 
