@@ -49,7 +49,7 @@ const sendEmail = async (
 			from: appEmail,
 			to: userEmail,
 			subject: `Recover your password from ${username}`,
-			text: message,
+			html: message,
 		};
 
 		const info = await transporter.sendMail(config);
