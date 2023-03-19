@@ -1,32 +1,35 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import { useRouter } from 'next/router';
 import { Button } from '@chakra-ui/react';
 import axios from 'axios';
-import { useRouter } from 'next/router';
 import { useCustomToast } from '@/lib/hooks/useCustomToast';
+
+const API_URI = process.env.NEXT_PUBLIC_APP_URI;
+const TOKEN_NAME = process.env.TOKEN_NAME;
 
 function SessionManager() {
 	const [isLoggedIn, setIsLoggedIn] = useState(false);
-	const API_URI = process.env.NEXT_PUBLIC_APP_URI;
 	const showToast = useCustomToast();
 	const router = useRouter();
 
-	function handleLogin() {
-		// perform login logic here, such as checking user credentials
-		setIsLoggedIn(true);
-	}
+	const handleLogin = () => {
+		const tokenExists = document.cookie.includes(`${TOKEN_NAME}=`);
+		setIsLoggedIn(tokenExists);
+	};
 
 	const handleLogout = async () => {
-		// perform logout logic here, such as clearing user session data
 		setIsLoggedIn(false);
 		try {
 			const response = await axios.get(`${API_URI}/api/auth/logout`);
 
-			if (response.status !== 200)
+			if (response.status !== 200) {
 				showToast({
 					title: 'Aplicación crash',
 					description: 'Algo inesperado ocurrió!',
 					status: 'error',
 				});
+			}
+
 			showToast({
 				title: 'Cierre de sesión',
 				description: 'Vuelve pronto!',
@@ -44,24 +47,32 @@ function SessionManager() {
 		}
 	};
 
-	function handleSignup() {
-		// perform signup logic here, such as creating a new user account
-		setIsLoggedIn(true);
-	}
+	const handleSignup = () => {
+		const tokenExists = document.cookie.includes(`${TOKEN_NAME}=`);
+		setIsLoggedIn(tokenExists);
+	};
+
+	useEffect(() => {
+		if (TOKEN_NAME) {
+			const tokenExists = document.cookie.includes(`${TOKEN_NAME}=`);
+			setIsLoggedIn(tokenExists);
+			console.log(tokenExists)
+		}
+	}, []);
 
 	return (
 		<>
-			{true ? (
+			{isLoggedIn ? (
 				<Button onClick={handleLogout} variant='primary'>
-					Log out
+					Cerrar sesión
 				</Button>
 			) : (
 				<>
 					<Button onClick={handleSignup} variant='primary'>
-						Sign up
+						Registrar
 					</Button>
 					<Button onClick={handleLogin} variant='primary'>
-						Log in
+						Entrar
 					</Button>
 				</>
 			)}
