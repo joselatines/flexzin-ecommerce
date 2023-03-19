@@ -9,7 +9,6 @@ interface IProps {
 export default function Home({ products }: IProps) {
 	return (
 		<>
-			Home page
 			<Flex gap={6}>
 				<Wrap>
 					{products.map((p, index) => (
