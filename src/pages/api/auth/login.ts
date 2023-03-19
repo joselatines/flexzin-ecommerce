@@ -16,16 +16,16 @@ export default async function loginHandler(
 	const { email, password } = req.body;
 
 	try {
+		// Find user by email
+		const user = await User.findOne({ email }).exec();
 
+		if (!user) {
 			return res.status(404).json({
 				error: 'User does not exist',
 				statusCode: 404,
 				msg: 'First, you have to sign up',
 			});
-
-		// Find user by email
-		const user = await User.findOne({ email }).exec();
-
+		}
 
 		const isMatch = await bcrypt.compare(password, user.password);
 
@@ -58,7 +58,7 @@ export default async function loginHandler(
 		}
 
 		// Set cookie with token
-		const serialized = serialize('tokenName', token.toString(), {
+		const serialized = serialize(tokenName, token.toString(), {
 			httpOnly: true,
 			secure: process.env.NODE_ENV === 'production',
 			sameSite: 'strict',
