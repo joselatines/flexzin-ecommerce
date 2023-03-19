@@ -1,7 +1,7 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 import bcrypt from 'bcryptjs';
 import User from '@/database/models/User';
-import { IApiRes } from '@/interfaces/api';
+import { IApiRes } from '@/lib/interfaces/api';
 
 export default async function handler(
 	req: NextApiRequest,

@@ -2,7 +2,7 @@ import { NextApiRequest, NextApiResponse } from 'next';
 import { sign } from 'jsonwebtoken';
 import nodemailer from 'nodemailer';
 import User from '@/database/models/User';
-import { IApiRes } from '@/interfaces/api';
+import { IApiRes } from '@/lib/interfaces/api';
 import { serialize } from 'cookie';
 
 const sendEmail = async (

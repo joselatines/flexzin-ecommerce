@@ -1,6 +1,6 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 import dbConnect from '@/database/dbConnection';
-import { IApiRes } from '@/interfaces/api';
+import { IApiRes } from '@/lib/interfaces/api';
 import Product, { IProduct } from '@/database/models/Product';
 import Order from '@/database/models/Order';
 import mongoose from 'mongoose';

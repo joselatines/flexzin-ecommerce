@@ -2,7 +2,7 @@ import { NextApiRequest, NextApiResponse } from 'next';
 import bcrypt from 'bcryptjs';
 import User, { IUser } from '@/database/models/User';
 import dbConnect from '@/database/dbConnection';
-import { IApiRes } from '@/interfaces/api';
+import { IApiRes } from '@/lib/interfaces/api';
 
 export default async function handler(
 	req: NextApiRequest,
@@ -34,10 +34,9 @@ export default async function handler(
 
 		case 'POST':
 			try {
-				
 				const { password } = body;
 				const passwordHashed = await bcrypt.hash(password, 10);
-				
+
 				const newUser = await User.create({
 					...body,
 					password: passwordHashed,
@@ -51,7 +50,7 @@ export default async function handler(
 			} catch (error) {
 				console.error({ error });
 
-        // if mongo error
+				// if mongo error
 				if (error.code === 11000) {
 					// duplicate email error
 					res.status(400).json({
@@ -66,7 +65,6 @@ export default async function handler(
 						error: error,
 					});
 				}
-
 			}
 			break;
 

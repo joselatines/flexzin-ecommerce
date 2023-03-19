@@ -1,4 +1,4 @@
-import { IApiRes } from '@/interfaces/api';
+import { IApiRes } from '@/lib/interfaces/api';
 import type { NextApiRequest, NextApiResponse } from 'next';
 import Product from '@/database/models/Product';
 import dbConnect from '@/database/dbConnection';
