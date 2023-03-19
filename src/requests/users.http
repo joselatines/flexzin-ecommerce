@@ -1,8 +1,8 @@
-GET http://localhost:3000/api/users
+GET https://flexzin-ecommerce.vercel.app/api/users
 
 ###
 
-POST http://localhost:3000/api/users
+POST https://flexzin-ecommerce.vercel.app/api/users
 content-type: application/json
 
 {

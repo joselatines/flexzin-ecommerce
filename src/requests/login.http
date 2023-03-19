@@ -1,8 +1,8 @@
-GET http://localhost:3000/api/auth/logout
+GET https://flexzin-ecommerce.vercel.app/api/auth/logout
 
 ###
 
-POST http://localhost:3000/api/auth/login
+POST https://flexzin-ecommerce.vercel.app/api/auth/login
 content-type: application/json
 
 {

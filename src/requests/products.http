@@ -2,7 +2,7 @@ GET https://flexzin-ecommerce.vercel.app/api/products
 
 ###
 
-POST http://localhost:3000/api/products
+POST https://flexzin-ecommerce.vercel.app/api/products
 content-type: application/json
 
 {
