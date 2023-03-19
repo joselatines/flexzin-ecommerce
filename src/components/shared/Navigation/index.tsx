@@ -1,49 +1,27 @@
-import {
-	Box,
-	Button,
-	ButtonGroup,
-	Container,
-	Flex,
-	HStack,
-	IconButton,
-	useBreakpointValue,
-} from '@chakra-ui/react';
-import NextLink from 'next/link';
-import { FiMenu } from 'react-icons/fi';
-import SessionManager from './SessionManager';
+import NextImage from 'next/image';
+import { Box, HStack, useBreakpointValue } from '@chakra-ui/react';
+import { useState } from 'react';
+import MenuLinks from './MenuLinks';
+import logo from '/public/images/logo.png';
+import MenuToggle from './MenuToggle';
 
 function Navigation() {
-	const isDesktop = useBreakpointValue({ base: false, lg: true });
+	const isDesktop = useBreakpointValue({ md: false, lg: true });
+	const [isOpen, setIsOpen] = useState(false);
+	const toggle = () => setIsOpen(!isOpen);
+
+	const links = [
+		{ href: '/', content: 'Productos' },
+		{ href: '/cart', content: 'Carrito' },
+	];
+
 	return (
-		<Box as='nav' pb={{ base: '12', md: '24' }}>
-			<Box bg='bg-surface' boxShadow='sm'>
-				<Container py={{ base: '4', lg: '5' }}>
-					<HStack spacing='10' justify='space-between'>
-						<h1>Flexzin</h1>
-						{isDesktop ? (
-							<Flex justify='space-between' flex='1'>
-								<ButtonGroup variant='link' spacing='8'>
-									{['Product', 'Pricing', 'Resources', 'Support'].map(item => (
-										<Button key={item}>{item}</Button>
-									))}
-								</ButtonGroup>
-								<HStack spacing='3'>
-									<Button variant='ghost'>
-										<NextLink href='/cart'>Carrito</NextLink>{' '}
-									</Button>
-									<SessionManager />
-								</HStack>
-							</Flex>
-						) : (
-							<IconButton
-								variant='ghost'
-								icon={<FiMenu fontSize='1.25rem' />}
-								aria-label='Open Menu'
-							/>
-						)}
-					</HStack>
-				</Container>
-			</Box>
+		<Box as='nav' py={{ base: '4', lg: '5' }} px='8'>
+			<HStack spacing='10' justify='space-between'>
+				<NextImage src={logo} alt='Logo Flexzin' width={100} height={100} />
+				<MenuLinks links={links} isOpen={isOpen} />
+				{!isDesktop && <MenuToggle toggle={toggle} isOpen={isOpen} />}
+			</HStack>
 		</Box>
 	);
 }

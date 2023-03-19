@@ -1,4 +1,4 @@
-import { IApiRes } from '@/interfaces/api';
+import { IApiRes } from '@/lib/interfaces/api';
 import { serialize } from 'cookie';
 import { NextApiRequest, NextApiResponse } from 'next';
 

@@ -18,9 +18,8 @@ export default function MainLayout({ children }: IProps) {
 
 			<Flex flexDirection='column' height='100vh'>
 				{/* Navbar */}
-				<Box p={4}>
-					<Navigation />
-				</Box>
+
+				<Navigation />
 
 				<Flex flexGrow={1}>
 					{/* Aside 1 */}
@@ -32,11 +31,6 @@ export default function MainLayout({ children }: IProps) {
 					<Box bg='white' as='main' flexGrow={1} p={4}>
 						{children}
 					</Box>
-
-					{/* Aside 2 */}
-					{/* 	<Box bg='gray.200' flexBasis='200px' p={4}>
-						Aside 2
-					</Box> */}
 				</Flex>
 
 				{/* Footer */}

@@ -1,7 +1,7 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 import Product, { IProduct } from '@/database/models/Product';
 import dbConnect from '@/database/dbConnection';
-import { IApiRes } from '@/interfaces/api';
+import { IApiRes } from '@/lib/interfaces/api';
 
 export default async function handler(
 	req: NextApiRequest,
@@ -39,7 +39,7 @@ export default async function handler(
 				}
 
 				const newProduct = await Product.create(body);
-				
+
 				res.status(201).json({
 					statusCode: 201,
 					data: {

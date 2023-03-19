@@ -1,6 +1,6 @@
 import ProductCard from '@/components/ProductCard';
 import { IProduct } from '@/database/models/Product';
-import { Flex } from '@chakra-ui/react';
+import { Flex, Wrap, WrapItem } from '@chakra-ui/react';
 
 interface IProps {
 	products: IProduct[];
@@ -9,11 +9,14 @@ interface IProps {
 export default function Home({ products }: IProps) {
 	return (
 		<>
-			Home page
 			<Flex gap={6}>
-				{products.map((p, index) => (
-					<ProductCard key={index} product={p} />
-				))}
+				<Wrap>
+					{products.map((p, index) => (
+						<WrapItem key={index}>
+							<ProductCard product={p} />
+						</WrapItem>
+					))}
+				</Wrap>
 			</Flex>
 		</>
 	);
@@ -21,7 +24,7 @@ export default function Home({ products }: IProps) {
 
 export async function getStaticProps() {
 	try {
-		const apiURI = process.env.NEXT_PUBLIC_APP_URI
+		const apiURI = process.env.NEXT_PUBLIC_APP_URI;
 		const res = await fetch(`${apiURI}/api/products`);
 		const { data } = await res.json();
 
