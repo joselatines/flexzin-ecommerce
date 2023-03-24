@@ -7,9 +7,11 @@ import { CartProvider } from '@/lib/context/CartContext';
 export default function App({ Component, pageProps }: AppProps) {
 	return (
 		<ChakraProvider>
-			<MainLayout>
-				<Component {...pageProps} />
-			</MainLayout>
+			<CartProvider>
+				<MainLayout>
+					<Component {...pageProps} />
+				</MainLayout>
+			</CartProvider>
 		</ChakraProvider>
 	);
 }
