@@ -1,4 +1,4 @@
-GET https://flexzin-ecommerce.vercel.app/api/auth/login
+GET https://flexzin-ecommerce.vercel.app/api/auth/logout
 
 ###
 
