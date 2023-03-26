@@ -5,7 +5,7 @@ type Product = IProduct;
 
 interface CartContextValue {
 	products: Product[];
-	addToCart: (product: Product) => void;
+	addToCart: (product: Product, newQuantity?: number) => void;
 	removeFromCart: (productId: string) => void;
 	emptyCart: () => void;
 	getProducts: () => Product[];
@@ -30,30 +30,32 @@ export const CartProvider = ({ children }: { children: React.ReactNode }) => {
 		const productsExits = storedProducts ? JSON.parse(storedProducts) : [];
 
 		setProducts(productsExits);
-		return products;
+		return productsExits;
 	};
 
-	const addToCart = (product: Product) => {
-		const existingProduct = products.find(p => p.id.toString() === product.id);
-
-		if (existingProduct) {
-			const updatedProducts = products.map(p => {
-				if (p.id.toString() === product.id) {
-					return { ...p, qty: p.qty + 1 };
-				}
-
-				return p;
-			});
-
-			setProducts(updatedProducts);
-			localStorage.setItem('products', JSON.stringify(updatedProducts));
+	const addToCart = (product: Product, newQuantity?: number) => {
+		// If there is an existing product but no new quantity provided, increment the existing product's quantity by 1
+		const existingProductIndex = products.findIndex(p => p.id.toString() === product.id);
+		// Get the existing product from the cart, if it exists
+		const existingProduct = existingProductIndex !== -1 ? products[existingProductIndex] : undefined;
+		
+		let updatedProducts;
+		if (existingProduct && newQuantity) {
+			updatedProducts = [...products];
+			updatedProducts[existingProductIndex] = { ...existingProduct, qty: newQuantity };
+		} else if (existingProduct) {
+			// If there is an existing product but no new quantity provided, increment the existing product's quantity by 1
+			updatedProducts = [...products];
+			updatedProducts[existingProductIndex] = { ...existingProduct, qty: existingProduct.qty + 1 };
 		} else {
-			const newProducts = [...products, { ...product, qty: 1 }];
-
-			setProducts(newProducts);
-			localStorage.setItem('products', JSON.stringify(newProducts));
+			// If there is no existing product, add the new product with a quantity of 1 to the cart
+			updatedProducts = [...products, { ...product, qty: 1 }];
 		}
+		
+		setProducts(updatedProducts);
+		localStorage.setItem('products', JSON.stringify(updatedProducts));
 	};
+	
 
 	const removeFromCart = (productId: string) => {
 		const existingProduct = products.find(
