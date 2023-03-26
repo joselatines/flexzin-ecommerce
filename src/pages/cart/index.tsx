@@ -14,10 +14,11 @@ import {
 import { useState, useEffect } from 'react';
 
 function ShoppingCartPage() {
-	const { getProducts } = useCart();
+	const { getProducts, addToCart, removeFromCart } = useCart();
 
 	const [productsList, setProductsList] = useState<IProduct[]>([]);
 	const [totalPrice, setTotalPrice] = useState<number>(0);
+	const [refresh, setRefresh] = useState<number>(0);
 
 	const calculateTotal = (products: IProduct[]): number => {
 		const initialValue = 0;
@@ -28,15 +29,25 @@ function ShoppingCartPage() {
 		return total;
 	};
 
-	useEffect(() => {
-		const fetchLocalStorage = async () => {
-			const products = await getProducts();
-			setProductsList(products);
-			setTotalPrice(calculateTotal(productsList));
-		};
+	const fetchLocalStorage = async () => {
+		const products = await getProducts();
+		setProductsList(products);
+		setTotalPrice(calculateTotal(productsList));
+	};
 
+	useEffect(() => {
 		fetchLocalStorage();
-	}, []);
+	}, [refresh]);
+
+	const handleAdd = (product: IProduct, quantity: number) => {
+		console.log({product});
+		addToCart(product, quantity);
+		setRefresh(prev => prev + 1);
+	};
+	const handleDelete = (id: string) => {
+		removeFromCart(id);
+		setRefresh(prev => prev + 1);
+	};
 
 	return (
 		<>
@@ -59,7 +70,12 @@ function ShoppingCartPage() {
 
 						<Stack spacing='6'>
 							{productsList.map((item: IProduct) => (
-								<CartItem key={item.id} {...item} />
+								<CartItem
+									key={item.id}
+									product={item}
+									handleAdd={handleAdd}
+									handleDelete={handleDelete}
+								/>
 							))}
 						</Stack>
 					</Stack>

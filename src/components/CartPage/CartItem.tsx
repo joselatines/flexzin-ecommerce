@@ -10,6 +10,7 @@ import { PriceTag } from './PriceTag';
 import { CartProductMeta } from './CartProductMeta';
 import { IProduct } from '@/database/models/Product';
 import { useCart } from '@/lib/context/CartContext';
+import { useState } from 'react';
 
 type CartItemProps = {
 	isGiftWrapping?: boolean;
@@ -40,24 +41,8 @@ const QuantitySelect = (product: SelectProps) => {
 	);
 };
 
-function CartItem(product: any) {
-	const {
-		title,
-		description,
-		qty,
-		images,
-		currency,
-		price,
-		onChangeQuantity,
-		onClickDelete,
-	} = product;
-
-	const { addToCart } = useCart();
-
-	const handleAddMoreProducts = (quantity: number) => {
-		console.log({ qty: quantity, ...product });
-		addToCart({ qty: quantity, ...product });
-	};
+function CartItem({ product, handleAdd, handleDelete }: any) {
+	const { title, description, qty, images, currency, price } = product;
 
 	return (
 		<Flex
@@ -80,13 +65,13 @@ function CartItem(product: any) {
 				<QuantitySelect
 					value={qty}
 					onChange={e => {
-						handleAddMoreProducts(+e.currentTarget.value);
+						handleAdd(product, +e.currentTarget.value);
 					}}
 				/>
 				<PriceTag price={price} currency={currency} />
 				<CloseButton
 					aria-label={`Delete ${title} from cart`}
-					onClick={onClickDelete}
+					onClick={() => handleDelete(product.id)}
 				/>
 			</Flex>
 
@@ -98,13 +83,14 @@ function CartItem(product: any) {
 				justify='space-between'
 				display={{ base: 'flex', md: 'none' }}
 			>
-				<Link fontSize='sm' textDecor='underline'>
-					Delete
-				</Link>
+				<CloseButton
+					aria-label={`Delete ${title} from cart`}
+					onClick={() => handleDelete(product.id)}
+				/>
 				<QuantitySelect
 					value={qty}
 					onChange={e => {
-						handleAddMoreProducts(+e.currentTarget.value);
+						handleAdd(product, +e.currentTarget.value);
 					}}
 				/>
 				<PriceTag price={price} currency={currency} />

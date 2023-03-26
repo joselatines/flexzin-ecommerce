@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { AiOutlineShoppingCart } from 'react-icons/ai';
-import NextLink from 'next/link';
 import { useCart } from '@/lib/context/CartContext';
+import { Link } from '@chakra-ui/react';
 
 function ShoppingCart() {
 	const { getProducts } = useCart();
@@ -17,12 +17,10 @@ function ShoppingCart() {
 	}, []);
 
 	return (
-		<div>
-			<NextLink href='/cart'>
-				<span>{items}</span>
-				<AiOutlineShoppingCart />
-			</NextLink>
-		</div>
+		<Link href='/cart'>
+			<span>{items}</span>
+			<AiOutlineShoppingCart />
+		</Link>
 	);
 }
 
