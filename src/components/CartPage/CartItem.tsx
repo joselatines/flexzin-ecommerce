@@ -9,6 +9,7 @@ import {
 import { PriceTag } from './PriceTag';
 import { CartProductMeta } from './CartProductMeta';
 import { IProduct } from '@/database/models/Product';
+import { useCart } from '@/lib/context/CartContext';
 
 type CartItemProps = {
 	isGiftWrapping?: boolean;
@@ -51,13 +52,24 @@ function CartItem(product: any) {
 		onClickDelete,
 	} = product;
 
+	const { addToCart } = useCart();
+
+	const handleAddMoreProducts = (quantity: number) => {
+		console.log({ qty: quantity, ...product });
+		addToCart({ qty: quantity, ...product });
+	};
+
 	return (
 		<Flex
 			direction={{ base: 'column', md: 'row' }}
 			justify='space-between'
 			align='center'
 		>
-			<CartProductMeta name={title} description={description} image={images[0]} />
+			<CartProductMeta
+				name={title}
+				description={description}
+				image={images[0]}
+			/>
 
 			{/* Desktop */}
 			<Flex
@@ -68,7 +80,7 @@ function CartItem(product: any) {
 				<QuantitySelect
 					value={qty}
 					onChange={e => {
-						onChangeQuantity?.(+e.currentTarget.value);
+						handleAddMoreProducts(+e.currentTarget.value);
 					}}
 				/>
 				<PriceTag price={price} currency={currency} />
@@ -92,7 +104,7 @@ function CartItem(product: any) {
 				<QuantitySelect
 					value={qty}
 					onChange={e => {
-						onChangeQuantity?.(+e.currentTarget.value);
+						handleAddMoreProducts(+e.currentTarget.value);
 					}}
 				/>
 				<PriceTag price={price} currency={currency} />

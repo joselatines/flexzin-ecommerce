@@ -1,6 +1,7 @@
 import CartItem from '@/components/CartPage/CartItem';
 import { CartOrderSummary } from '@/components/CartPage/CartOrderSummary';
 import { IProduct } from '@/database/models/Product';
+import { useCart } from '@/lib/context/CartContext';
 import {
 	Box,
 	Flex,
@@ -10,8 +11,33 @@ import {
 	Stack,
 	useColorModeValue as mode,
 } from '@chakra-ui/react';
+import { useState, useEffect } from 'react';
 
-function ShoppingCartPage({ products }: any) {
+function ShoppingCartPage() {
+	const { getProducts } = useCart();
+
+	const [productsList, setProductsList] = useState<IProduct[]>([]);
+	const [totalPrice, setTotalPrice] = useState<number>(0);
+
+	const calculateTotal = (products: IProduct[]): number => {
+		const initialValue = 0;
+		const total = products.reduce((accumulator, productItem) => {
+			return accumulator + productItem.salePrice;
+		}, initialValue);
+
+		return total;
+	};
+
+	useEffect(() => {
+		const fetchLocalStorage = async () => {
+			const products = await getProducts();
+			setProductsList(products);
+			setTotalPrice(calculateTotal(productsList));
+		};
+
+		fetchLocalStorage();
+	}, []);
+
 	return (
 		<>
 			<h1>Shopping cart</h1>
@@ -28,18 +54,18 @@ function ShoppingCartPage({ products }: any) {
 				>
 					<Stack spacing={{ base: '8', md: '10' }} flex='2'>
 						<Heading fontSize='2xl' fontWeight='extrabold'>
-							Shopping Cart (3 items)
+							Shopping Cart ({productsList.length})
 						</Heading>
 
 						<Stack spacing='6'>
-							{products.map((item: IProduct) => (
+							{productsList.map((item: IProduct) => (
 								<CartItem key={item.id} {...item} />
 							))}
 						</Stack>
 					</Stack>
 
 					<Flex direction='column' align='center' flex='1'>
-						<CartOrderSummary />
+						<CartOrderSummary totalPrice={totalPrice} />
 						<HStack mt='6' fontWeight='semibold'>
 							<p>or</p>
 							<Link color={mode('blue.500', 'blue.200')}>
@@ -51,23 +77,6 @@ function ShoppingCartPage({ products }: any) {
 			</Box>
 		</>
 	);
-}
-
-export async function getStaticProps() {
-	try {
-		const apiURI = process.env.NEXT_PUBLIC_APP_URI
-		const res = await fetch(`${apiURI}/api/products`);
-		const { data } = await res.json();
-
-		return {
-			props: { products: data },
-		};
-	} catch (error) {
-		console.error(error);
-		return {
-			props: { products: [] },
-		};
-	}
 }
 
 export default ShoppingCartPage;

@@ -32,7 +32,7 @@ function MenuLinks({ links, isOpen }: IProps) {
 				top={['0', 'auto']}
 			>
 				{links.map(link => (
-					<Link href={link.href}>
+					<Link href={link.href} key={link.href}>
 						<Text display='block'>{link.content}</Text>
 					</Link>
 				))}

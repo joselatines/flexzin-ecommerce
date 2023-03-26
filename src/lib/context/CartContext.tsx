@@ -6,7 +6,7 @@ type Product = IProduct;
 interface CartContextValue {
 	products: Product[];
 	addToCart: (product: Product) => void;
-	removeFromCart: (productId: number) => void;
+	removeFromCart: (productId: string) => void;
 	emptyCart: () => void;
 	getProducts: () => Product[];
 }
@@ -14,9 +14,9 @@ interface CartContextValue {
 const CartContext = createContext<CartContextValue>({
 	products: [],
 	addToCart: () => {},
-	removeFromCart: () => {},
+	removeFromCart: (id: string) => {},
 	emptyCart: () => {},
-	getProducts: () => []
+	getProducts: () => [],
 });
 
 export const useCart = () => useContext(CartContext);
@@ -27,11 +27,11 @@ export const CartProvider = ({ children }: { children: React.ReactNode }) => {
 	const getProducts = () => {
 		const storedProducts = localStorage.getItem('products');
 
-		const productsExits =  storedProducts ? JSON.parse(storedProducts) : [];
+		const productsExits = storedProducts ? JSON.parse(storedProducts) : [];
 
-		setProducts(productsExits)
-		return products
-	}
+		setProducts(productsExits);
+		return products;
+	};
 
 	const addToCart = (product: Product) => {
 		const existingProduct = products.find(p => p.id.toString() === product.id);
@@ -55,7 +55,7 @@ export const CartProvider = ({ children }: { children: React.ReactNode }) => {
 		}
 	};
 
-	const removeFromCart = (productId: number) => {
+	const removeFromCart = (productId: string) => {
 		const existingProduct = products.find(
 			p => p.id.toString() === productId.toString()
 		);

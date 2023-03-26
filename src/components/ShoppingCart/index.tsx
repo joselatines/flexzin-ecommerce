@@ -8,8 +8,13 @@ function ShoppingCart() {
 	const [items, setItems] = useState(0);
 
 	useEffect(() => {
-		setItems(getProducts().length);
-	}, [getProducts]);
+		const callLocalStorage = async () => {
+			const productsLength = await getProducts().length;
+			setItems(productsLength);
+		};
+
+		callLocalStorage();
+	}, []);
 
 	return (
 		<div>
