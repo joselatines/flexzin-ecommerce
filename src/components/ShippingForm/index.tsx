@@ -1,101 +1,190 @@
-import { useCustomToast } from '@/lib/hooks/useCustomToast';
+import { useState } from 'react';
+import emailjs from '@emailjs/browser';
+import { useFormik } from 'formik';
+import * as Yup from 'yup';
 import { FormControl, FormLabel, Input, Button } from '@chakra-ui/react';
+import { useCustomToast } from '@/lib/hooks/useCustomToast';
 import { useRouter } from 'next/router';
+
 
 export default function ShippingForm() {
 	const showToast = useCustomToast();
 	const router = useRouter();
+	const [payment, setPayment] = useState('efectivo');
 
-	const createOrder = async () => {
-		const orderData = {
-			user_id: '64051da829b6801b84073666',
-			payment_method: 'transfer',
-			products: [
-				{
-					id: '6406838b0ffd6a2414bc7e53',
-					title: 'probando title',
-					price: 55,
-					qty: 0,
-					description: 'asdfasdfasdfasdf',
-					images: 'string[]',
-				},
-			],
+	type formValues = {
+		fullName: string;
+		city: string;
+		parish: string;
+		phoneNumber: string;
+		email: string;
+		paymentMethod: string;
+	};
+
+	const sendEmail = (
+		userFullName: string,
+		userEmail: string,
+		message: string
+	) => {
+		const templateParams = {
+			from_name: userFullName,
+			reply_to: userEmail,
+			message_html: message,
 		};
 
-		try {
-			const apiURI = process.env.NEXT_PUBLIC_APP_URI
-			const response = await fetch(`${apiURI}/api/orders`, {
-				method: 'POST',
-				headers: {
-					'Content-Type': 'application/json',
+		emailjs
+			.send(
+				'service_8gpefgi',
+				'template_zmcgusl',
+				templateParams,
+				'jehC29-_LeK6wUf5s9ge7'
+			)
+			.then(
+				result => {
+					console.log(result.text);
 				},
-				body: JSON.stringify(orderData),
-			});
+				error => {
+					console.log(error.text);
+				}
+			);
+	};
+	const createOrder = async (order: any) => {
+		await sendEmail(order.fullName, order.email, 'holi bb');
+	};
 
-			if (!response.ok) {
-				showToast({
-					title: 'Orden NO enviada',
-					description: 'Algo salió mal',
-					status: 'error',
-			
-				});
-				throw new Error(`HTTP error! status: ${response.status}`);
-			}
+	const initialValues = {
+		fullName: '',
+		city: '',
+		parish: '',
+		phoneNumber: '',
+		email: '',
+		paymentMethod: '',
+	};
 
-			const data = await response.json();
+	const validationSchema = Yup.object({
+		fullName: Yup.string().required('Required'),
+		city: Yup.string().required('Required'),
+		parish: Yup.string().required('Required'),
+		phoneNumber: Yup.string()
+			.matches(/^[0-9]+$/, 'Must be only digits')
+			.min(10, 'Must be exactly 10 digits')
+			.required('Phone number is required'),
+		email: Yup.string().email('Invalid email address').required('Required'),
+		paymentMethod: Yup.string(),
+	});
+
+	const formik = useFormik({
+		initialValues,
+		validationSchema: validationSchema,
+		onSubmit: async values => {
+			// Handle form submission
+			await createOrder({ ...values, paymentMethod: payment });
 
 			showToast({
-				title: 'Orden enviada',
-				description:
-					'Revisa tu WhatsApp y tu correo para conocer mas acerca tu orden',
+				title: 'Order Submitted!',
 				status: 'success',
+				duration: 5000,
+				isClosable: true,
 			});
-
-			return data;
-		} catch (error) {
-			console.error(error);
-		}
-	};
-
-	const handleSubmit = async () => {
-		const orderSended = await createOrder();
-
-		orderSended && router.push('/');
-	};
+			// router.push('/');
+		},
+	});
 
 	return (
-		<form>
+		<form onSubmit={formik.handleSubmit}>
 			<FormControl>
-				<FormLabel>Full Name</FormLabel>
-				<Input placeholder='John Doe' />
+				<FormLabel>Nombre completo</FormLabel>
+				<Input
+					required
+					name='fullName'
+					placeholder='Juan Perez'
+					value={formik.values.fullName}
+					onChange={formik.handleChange}
+					onBlur={formik.handleBlur}
+				/>
+				{formik.errors.fullName && (
+					<span className='error'>{formik.errors.fullName}</span>
+				)}
 			</FormControl>
 
 			<FormControl>
-				<FormLabel>Street Address</FormLabel>
-				<Input placeholder='123 Main St' />
+				<FormLabel>Ciudad</FormLabel>
+				<Input
+					required
+					name='city'
+					placeholder='Caracas'
+					value={formik.values.city}
+					onChange={formik.handleChange}
+					onBlur={formik.handleBlur}
+				/>
+				{formik.errors.city && (
+					<span className='error'>{formik.errors.city}</span>
+				)}
 			</FormControl>
 
 			<FormControl>
-				<FormLabel>Zip Code</FormLabel>
-				<Input placeholder='12345' />
+				<FormLabel>Parroquia</FormLabel>
+				<Input
+					required
+					name='parish'
+					placeholder='Chacao'
+					value={formik.values.parish}
+					onChange={formik.handleChange}
+					onBlur={formik.handleBlur}
+				/>
+				{formik.errors.parish && (
+					<span className='error'>{formik.errors.parish}</span>
+				)}
 			</FormControl>
 
 			<FormControl>
-				<FormLabel>City</FormLabel>
-				<Input placeholder='New York' />
+				<FormLabel>Número de Whastapp</FormLabel>
+				<Input
+					required
+					name='phoneNumber'
+					placeholder='+58 123 456 7890'
+					value={formik.values.phoneNumber}
+					onChange={formik.handleChange}
+					onBlur={formik.handleBlur}
+				/>
+				{formik.errors.phoneNumber && (
+					<span className='error'>{formik.errors.phoneNumber}</span>
+				)}
 			</FormControl>
 
 			<FormControl>
-				<FormLabel>Email Address</FormLabel>
-				<Input placeholder='john.doe@example.com' />
+				<FormLabel>Correo electrónico</FormLabel>
+				<Input
+					required
+					name='email'
+					placeholder='juan.perez@example.com'
+					value={formik.values.email}
+					onChange={formik.handleChange}
+					onBlur={formik.handleBlur}
+				/>
+				{formik.errors.email && (
+					<span className='error'>{formik.errors.email}</span>
+				)}
 			</FormControl>
-
 			<FormControl>
 				<FormLabel>Payment Method</FormLabel>
-				<Input placeholder='Credit Card' />
+				<select
+					placeholder='Select payment method'
+					onChange={e => setPayment(e.target.value)}
+					name='paymentMethod'
+				>
+					<option value='efectivo'>Efectivo</option>
+					<option value='transferencia'>Transferencia</option>
+					<option value='binance'>Binance</option>
+				</select>
 			</FormControl>
 
-			<Button onClick={handleSubmit}>Submit</Button>
+			<Button
+				disabled={!formik.isValid || !formik.dirty || !formik.isSubmitting}
+				type='submit'
+			>
+				Submit
+			</Button>
 		</form>
 	);
 }

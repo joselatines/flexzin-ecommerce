@@ -1,5 +1,3 @@
-import NextLink from 'next/link';
-
 import {
 	Button,
 	Flex,
@@ -45,7 +43,7 @@ export const CartOrderSummary = ({ totalPrice, shippingTax = 0 }: any) => {
 				)}
 
 				<OrderSummaryItem label='Coupon Code'>
-					<NextLink href='#'>Add coupon code</NextLink>
+					<Link href='#'>Add coupon code</Link>
 				</OrderSummaryItem>
 				<Flex justify='space-between'>
 					<Text fontSize='lg' fontWeight='semibold'>
@@ -62,7 +60,7 @@ export const CartOrderSummary = ({ totalPrice, shippingTax = 0 }: any) => {
 				fontSize='md'
 				rightIcon={<FaArrowRight />}
 			>
-				<NextLink href='/cart/checking'>Checkout</NextLink>
+				<Link href='/cart/checking'>Checkout</Link>
 			</Button>
 		</Stack>
 	);
