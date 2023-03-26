@@ -82,7 +82,7 @@ function ShoppingCartPage() {
 						<CartOrderSummary totalPrice={totalPrice} />
 						<HStack mt='6' fontWeight='semibold'>
 							<p>or</p>
-							<Link color={mode('blue.500', 'blue.200')}>
+							<Link href='/' color={mode('blue.500', 'blue.200')}>
 								Continue shopping
 							</Link>
 						</HStack>

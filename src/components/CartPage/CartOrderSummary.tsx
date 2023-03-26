@@ -62,7 +62,7 @@ export const CartOrderSummary = ({ totalPrice, shippingTax = 0 }: any) => {
 				fontSize='md'
 				rightIcon={<FaArrowRight />}
 			>
-				<NextLink href='cart/checking'>Checkout</NextLink>
+				<NextLink href='/cart/checking'>Checkout</NextLink>
 			</Button>
 		</Stack>
 	);
