@@ -24,6 +24,6 @@
 		"**/*.ts",
 		"**/*.tsx",
 		"src/database/dbConnection.js"
-, "src/middleware.ts"	],
+, "src/not-working-middleware.ts"	],
 	"exclude": ["node_modules"]
 }
