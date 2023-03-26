@@ -8,7 +8,7 @@ interface CartContextValue {
 	addToCart: (product: Product) => void;
 	removeFromCart: (productId: number) => void;
 	emptyCart: () => void;
-	getProducts: () => void;
+	getProducts: () => Product[];
 }
 
 const CartContext = createContext<CartContextValue>({
@@ -16,7 +16,7 @@ const CartContext = createContext<CartContextValue>({
 	addToCart: () => {},
 	removeFromCart: () => {},
 	emptyCart: () => {},
-	getProducts: () => {}
+	getProducts: () => []
 });
 
 export const useCart = () => useContext(CartContext);
@@ -30,6 +30,7 @@ export const CartProvider = ({ children }: { children: React.ReactNode }) => {
 		const productsExits =  storedProducts ? JSON.parse(storedProducts) : [];
 
 		setProducts(productsExits)
+		return products
 	}
 
 	const addToCart = (product: Product) => {

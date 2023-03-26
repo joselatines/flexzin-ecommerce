@@ -39,6 +39,7 @@ export default async function handler(
 				}
 
 				const newProduct = await Product.create(body);
+				console.log('newProduct: ', newProduct)
 
 				res.status(201).json({
 					statusCode: 201,
