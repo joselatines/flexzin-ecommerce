@@ -21,18 +21,17 @@ function ShoppingCartPage() {
 	const [refresh, setRefresh] = useState<number>(0);
 
 	const calculateTotal = (products: IProduct[]): number => {
-		const initialValue = 0;
-		const total = products.reduce((accumulator, productItem) => {
-			return accumulator + productItem.salePrice;
-		}, initialValue);
-
-		return total;
+		const totalPrice = products.reduce((accumulator, product) => {
+			return accumulator + product.salePrice * product.qty;
+		}, 0);
+		return totalPrice;
 	};
 
 	const fetchLocalStorage = async () => {
 		const products = await getProducts();
 		setProductsList(products);
-		setTotalPrice(calculateTotal(productsList));
+		const subTotal = calculateTotal(productsList);
+		setTotalPrice(subTotal);
 	};
 
 	useEffect(() => {
@@ -40,7 +39,7 @@ function ShoppingCartPage() {
 	}, [refresh]);
 
 	const handleAdd = (product: IProduct, quantity: number) => {
-		console.log({product});
+		console.log({ product });
 		addToCart(product, quantity);
 		setRefresh(prev => prev + 1);
 	};
@@ -51,7 +50,6 @@ function ShoppingCartPage() {
 
 	return (
 		<>
-			<h1>Shopping cart</h1>
 			<Box
 				maxW={{ base: '3xl', lg: '7xl' }}
 				mx='auto'

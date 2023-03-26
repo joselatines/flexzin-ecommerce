@@ -68,7 +68,7 @@ function CartItem({ product, handleAdd, handleDelete }: any) {
 						handleAdd(product, +e.currentTarget.value);
 					}}
 				/>
-				<PriceTag price={price} currency={currency} />
+				<PriceTag price={price * qty} currency={currency} />
 				<CloseButton
 					aria-label={`Delete ${title} from cart`}
 					onClick={() => handleDelete(product.id)}
@@ -93,7 +93,7 @@ function CartItem({ product, handleAdd, handleDelete }: any) {
 						handleAdd(product, +e.currentTarget.value);
 					}}
 				/>
-				<PriceTag price={price} currency={currency} />
+				<PriceTag price={price * qty} currency={currency} />
 			</Flex>
 		</Flex>
 	);
