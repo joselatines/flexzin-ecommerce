@@ -1,4 +1,5 @@
 import { IProduct } from '@/database/models/Product';
+import { useCart } from '@/lib/context/CartContext';
 import {
 	AspectRatio,
 	Box,
@@ -12,7 +13,8 @@ import {
 	Text,
 	useColorModeValue,
 } from '@chakra-ui/react';
-import { FavoriteButton } from './FavoriteButton';
+import { useEffect, useState } from 'react';
+import FavoriteButton from './FavoriteButton';
 import PriceTag from './PriceTag';
 import Rating from './Rating';
 
@@ -41,6 +43,7 @@ function ProductCard({ product }: IProps) {
 						position='absolute'
 						top='4'
 						right='4'
+						product={product}
 						aria-label={`Add ${title} to your favourites`}
 					/>
 				</Box>
@@ -63,11 +66,6 @@ function ProductCard({ product }: IProps) {
 							{reviewsCount}
 						</Text>
 					</HStack>
-				</Stack>
-				<Stack align='center'>
-					<Button colorScheme='blue' width='full'>
-						Add to cart
-					</Button>
 				</Stack>
 			</Stack>
 		</>

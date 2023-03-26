@@ -1,6 +1,7 @@
 import ProductCard from '@/components/ProductCard';
 import { IProduct } from '@/database/models/Product';
 import { Flex, Wrap, WrapItem } from '@chakra-ui/react';
+import fakeDB from '@/database/fakeDB.json';
 
 interface IProps {
 	products: IProduct[];
@@ -24,12 +25,12 @@ export default function Home({ products }: IProps) {
 
 export async function getStaticProps() {
 	try {
-		const apiURI = process.env.NEXT_PUBLIC_APP_URI;
+		/* const apiURI = process.env.NEXT_PUBLIC_APP_URI;
 		const res = await fetch(`${apiURI}/api/products`);
-		const { data } = await res.json();
-
+		const { data } = await res.json(); */
+		console.log(fakeDB.products)
 		return {
-			props: { products: data },
+			props: { products: fakeDB.products },
 		};
 	} catch (error) {
 		console.error(error);
