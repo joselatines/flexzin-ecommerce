@@ -56,7 +56,7 @@ function SessionManager() {
 		if (TOKEN_NAME) {
 			const tokenExists = document.cookie.includes(`${TOKEN_NAME}=`);
 			setIsLoggedIn(tokenExists);
-			console.log(tokenExists)
+
 		}
 	}, []);
 

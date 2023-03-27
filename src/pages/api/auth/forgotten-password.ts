@@ -80,7 +80,6 @@ const createTemporalToken = (userEmail: string, tokenName: string) => {
 		path: '/',
 	});
 
-	console.log({ token });
 	return token;
 };
 
@@ -119,7 +118,7 @@ export default async function handler(
 
 		const temporalToken = createTemporalToken(email, tokenName);
 		const emailSent = await sendEmail(email, user.username, temporalToken);
-		console.log('emailSent: ', emailSent);
+
 
 		if (emailSent) {
 			return res.status(200).json({

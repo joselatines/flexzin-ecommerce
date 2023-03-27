@@ -40,7 +40,6 @@ function LoginPage() {
 
 		try {
 			const response = await axios.post('/api/auth/login', request);
-			console.log('response: ', response);
 
 			if (response.status === 200 && !response.data.error) {
 				showToast({

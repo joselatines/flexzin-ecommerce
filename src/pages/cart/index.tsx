@@ -39,7 +39,6 @@ function ShoppingCartPage() {
 	}, [refresh]);
 
 	const handleAdd = (product: IProduct, quantity: number) => {
-		console.log({ product });
 		addToCart(product, quantity);
 		setRefresh(prev => prev + 1);
 	};

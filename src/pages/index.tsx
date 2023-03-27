@@ -28,7 +28,6 @@ export async function getStaticProps() {
 		/* const apiURI = process.env.NEXT_PUBLIC_APP_URI;
 		const res = await fetch(`${apiURI}/api/products`);
 		const { data } = await res.json(); */
-		console.log(fakeDB.products)
 		return {
 			props: { products: fakeDB.products },
 		};
