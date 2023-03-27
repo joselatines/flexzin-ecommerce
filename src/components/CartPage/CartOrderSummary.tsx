@@ -1,3 +1,4 @@
+import { useCustomToast } from '@/lib/hooks/useCustomToast';
 import {
 	Button,
 	Flex,
@@ -29,9 +30,19 @@ const OrderSummaryItem = (props: OrderSummaryItemProps) => {
 };
 
 export const CartOrderSummary = ({ totalPrice, shippingTax = 0 }: any) => {
+	const showToast = useCustomToast();
+
+	const handleCouponCode = () => {
+		showToast({
+			title: 'No disponible',
+			status: 'info',
+			duration: 5000,
+			isClosable: true,
+		});
+	};
 	return (
 		<Stack spacing='8' borderWidth='1px' rounded='lg' padding='8' width='full'>
-			<Heading size='md'>Order Summary</Heading>
+			<Heading size='md'>Información de orden</Heading>
 
 			<Stack spacing='6'>
 				<OrderSummaryItem label='Subtotal' value={formatPrice(totalPrice)} />
@@ -42,8 +53,8 @@ export const CartOrderSummary = ({ totalPrice, shippingTax = 0 }: any) => {
 					/>
 				)}
 
-				<OrderSummaryItem label='Coupon Code'>
-					<Link href='#'>Add coupon code</Link>
+				<OrderSummaryItem label='Cupón de descuento'>
+					<Button onClick={handleCouponCode}>Agregar cupón</Button>
 				</OrderSummaryItem>
 				<Flex justify='space-between'>
 					<Text fontSize='lg' fontWeight='semibold'>
@@ -54,14 +65,11 @@ export const CartOrderSummary = ({ totalPrice, shippingTax = 0 }: any) => {
 					</Text>
 				</Flex>
 			</Stack>
-			<Button
-				colorScheme='blue'
-				size='lg'
-				fontSize='md'
-				rightIcon={<FaArrowRight />}
-			>
-				<Link href='/cart/checking'>Checkout</Link>
-			</Button>
+			<Link href='/cart/checking' size='lg'>
+				<Button colorScheme='blue' fontSize='md' rightIcon={<FaArrowRight />}>
+					Comprar
+				</Button>
+			</Link>
 		</Stack>
 	);
 };

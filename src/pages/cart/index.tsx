@@ -2,8 +2,10 @@ import CartItem from '@/components/CartPage/CartItem';
 import { CartOrderSummary } from '@/components/CartPage/CartOrderSummary';
 import { IProduct } from '@/database/models/Product';
 import { useCart } from '@/lib/context/CartContext';
+import { useCustomToast } from '@/lib/hooks/useCustomToast';
 import {
 	Box,
+	Button,
 	Flex,
 	Heading,
 	HStack,
@@ -12,13 +14,16 @@ import {
 	useColorModeValue as mode,
 } from '@chakra-ui/react';
 import { useState, useEffect } from 'react';
+import { BsFillTrash3Fill } from 'react-icons/bs';
 
 function ShoppingCartPage() {
-	const { getProducts, addToCart, removeFromCart } = useCart();
+	const { getProducts, addToCart, removeFromCart, emptyCart } = useCart();
 
 	const [productsList, setProductsList] = useState<IProduct[]>([]);
 	const [totalPrice, setTotalPrice] = useState<number>(0);
 	const [refresh, setRefresh] = useState<number>(0);
+
+	const showToast = useCustomToast();
 
 	const calculateTotal = (products: IProduct[]): number => {
 		const totalPrice = products.reduce((accumulator, product) => {
@@ -29,8 +34,10 @@ function ShoppingCartPage() {
 
 	const fetchLocalStorage = async () => {
 		const products = await getProducts();
+
+		const subTotal = calculateTotal(products);
+
 		setProductsList(products);
-		const subTotal = calculateTotal(productsList);
 		setTotalPrice(subTotal);
 	};
 
@@ -42,8 +49,20 @@ function ShoppingCartPage() {
 		addToCart(product, quantity);
 		setRefresh(prev => prev + 1);
 	};
+
 	const handleDelete = (id: string) => {
 		removeFromCart(id);
+		setRefresh(prev => prev + 1);
+	};
+
+	const handleClearCart = () => {
+		emptyCart();
+		showToast({
+			title: 'Carrito vacío',
+			status: 'success',
+			duration: 5000,
+			isClosable: true,
+		});
 		setRefresh(prev => prev + 1);
 	};
 
@@ -62,7 +81,7 @@ function ShoppingCartPage() {
 				>
 					<Stack spacing={{ base: '8', md: '10' }} flex='2'>
 						<Heading fontSize='2xl' fontWeight='extrabold'>
-							Shopping Cart ({productsList.length})
+							Tu carrito ({productsList.length})
 						</Heading>
 
 						<Stack spacing='6'>
@@ -74,15 +93,21 @@ function ShoppingCartPage() {
 									handleDelete={handleDelete}
 								/>
 							))}
+							{productsList.length > 0 && (
+								<Button onClick={handleClearCart}>
+									Limpiar carrito
+									<BsFillTrash3Fill />
+								</Button>
+							)}
 						</Stack>
 					</Stack>
 
 					<Flex direction='column' align='center' flex='1'>
 						<CartOrderSummary totalPrice={totalPrice} />
 						<HStack mt='6' fontWeight='semibold'>
-							<p>or</p>
+							<p>o</p>
 							<Link href='/' color={mode('blue.500', 'blue.200')}>
-								Continue shopping
+								Volver a productos
 							</Link>
 						</HStack>
 					</Flex>

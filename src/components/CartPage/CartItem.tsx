@@ -37,12 +37,17 @@ const QuantitySelect = (product: SelectProps) => {
 			<option value='2'>2</option>
 			<option value='3'>3</option>
 			<option value='4'>4</option>
+			<option value='5'>5</option>
+			<option value='6'>6</option>
+			<option value='7'>7</option>
+			<option value='8'>8</option>
+			<option value='9'>9</option>
 		</Select>
 	);
 };
 
 function CartItem({ product, handleAdd, handleDelete }: any) {
-	const { title, description, qty, images, currency, price } = product;
+	const { title, description, qty, images, currency, salePrice } = product;
 
 	return (
 		<Flex
@@ -68,7 +73,7 @@ function CartItem({ product, handleAdd, handleDelete }: any) {
 						handleAdd(product, +e.currentTarget.value);
 					}}
 				/>
-				<PriceTag price={price * qty} currency={currency} />
+				<PriceTag price={salePrice * qty} currency={currency} />
 				<CloseButton
 					aria-label={`Delete ${title} from cart`}
 					onClick={() => handleDelete(product.id)}
@@ -93,7 +98,7 @@ function CartItem({ product, handleAdd, handleDelete }: any) {
 						handleAdd(product, +e.currentTarget.value);
 					}}
 				/>
-				<PriceTag price={price * qty} currency={currency} />
+				<PriceTag price={salePrice * qty} currency={currency} />
 			</Flex>
 		</Flex>
 	);
