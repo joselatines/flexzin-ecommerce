@@ -9,17 +9,15 @@ interface IProps {
 
 export default function Home({ products }: IProps) {
 	return (
-		<>
-			<Flex gap={6}>
-				<Wrap>
-					{products.map((p, index) => (
-						<WrapItem key={index}>
-							<ProductCard product={p} />
-						</WrapItem>
-					))}
-				</Wrap>
-			</Flex>
-		</>
+		<Flex gap='10'>
+			<Wrap>
+				{products.map(product => (
+					<WrapItem key={product.id}>
+						<ProductCard product={product} />
+					</WrapItem>
+				))}
+			</Wrap>
+		</Flex>
 	);
 }
 

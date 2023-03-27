@@ -46,48 +46,38 @@ export default function ProductCard({ product }: Props) {
 	};
 
 	return (
-		<>
-			<Stack spacing={{ base: '4', md: '5' }}>
-				<Box position='relative'>
-					<AspectRatio ratio={4 / 3}>
-						<Image
-							src={images[0]}
-							alt={title}
-							draggable='false'
-							fallback={<Skeleton />}
-							borderRadius={{ base: 'md', md: 'xl' }}
-						/>
-					</AspectRatio>
-					<FavoriteButton
-						position='absolute'
-						top='4'
-						right='4'
-						handleClick={handleAddToCart}
-						isInCart={isInCart}
-						aria-label={`Add ${title} to your favourites`}
+		<Stack spacing={{ base: '10', md: '30' }} w='200px' minH='200px' margin='3'>
+			<Box position='relative'>
+				<AspectRatio ratio={4 / 3}>
+					<Image
+						src={images[0]}
+						alt={title}
+						draggable='false'
+						fallback={<Skeleton />}
+						borderRadius={{ base: 'md', md: 'xl' }}
 					/>
-				</Box>
-				<Stack>
-					<Stack spacing='1'>
-						<Text
-							fontWeight='medium'
-							color={useColorModeValue('gray.700', 'gray.400')}
-						>
-							{title}
-						</Text>
-						<PriceTag price={price} salePrice={salePrice} currency={currency} />
-					</Stack>
-					<HStack>
-						<Rating defaultValue={rating} size='sm' />
-						<Text
-							fontSize='sm'
-							color={useColorModeValue('gray.600', 'gray.400')}
-						>
-							{reviewsCount}
-						</Text>
-					</HStack>
+				</AspectRatio>
+				<FavoriteButton
+					position='absolute'
+					top='4'
+					right='4'
+					handleClick={handleAddToCart}
+					isInCart={isInCart}
+					aria-label={`Add ${title} to your favourites`}
+				/>
+			</Box>
+			<Stack>
+				<Stack spacing='1'>
+					<span>{title}</span>
+					<PriceTag price={price} salePrice={salePrice} currency={currency} />
 				</Stack>
+				<HStack>
+					<Rating defaultValue={rating} size='sm' />
+					<Text fontSize='sm' color={useColorModeValue('gray.600', 'gray.400')}>
+						{reviewsCount}
+					</Text>
+				</HStack>
 			</Stack>
-		</>
+		</Stack>
 	);
 }

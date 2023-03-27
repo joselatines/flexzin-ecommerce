@@ -36,7 +36,7 @@ function MenuLinks({ links, isOpen }: IProps) {
 						<Text display='block'>{link.content}</Text>
 					</Link>
 				))}
-				<SessionManager />
+				{/* <SessionManager /> */}
 			</Stack>
 		</Box>
 	);
