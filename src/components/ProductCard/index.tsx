@@ -46,9 +46,9 @@ export default function ProductCard({ product }: Props) {
 	};
 
 	return (
-		<Stack spacing={{ base: '10', md: '30' }} w='200px' minH='200px' margin='3'>
+		<Stack spacing={{ base: '10', md: '30' }} w='200px' minH='250px' margin='3'>
 			<Box position='relative'>
-				<AspectRatio ratio={4 / 3}>
+				<AspectRatio ratio={4 / 3} minH='200px'>
 					<Image
 						src={images[0]}
 						alt={title}

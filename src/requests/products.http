@@ -1,16 +1,21 @@
-GET https://flexzin-ecommerce.vercel.app/api/products
+GET http://localhost:3000/api/products
+
+###
+DELETE  http://localhost:3000/api/products/642232172d37a1557df1443f
 
 ###
 
-POST https://flexzin-ecommerce.vercel.app/api/products
+POST http://localhost:3000/api/products
 content-type: application/json
 
 {
-	"title": "Yeezys fdgfdg3550",
-	"price": 505,
-	"salePrice": 20,
-	"rating": 8,
-	"qty": 10,
-	"description": "top qudfgality",
-	"images": "https://images.unsplash.com/photo-1566138702430-e9de69726fe3?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8eWVlenklMjAzNTB8ZW58MHx8MHx8&w=1000&q=80"
+	"title": "Sueter Flexzin",
+	"price": 43,
+	"salePrice": 27,
+	"rating": 10,
+	"qty": 1,
+	"currency": "USD",
+	"description": "Exclusivo",
+	"reviewsCount": 17,
+	"images":["https://i.postimg.cc/N0sgQQZy/270015105-129062612909899-193759229189531075-n.jpg"]
 }

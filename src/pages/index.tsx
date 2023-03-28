@@ -9,25 +9,31 @@ interface IProps {
 
 export default function Home({ products }: IProps) {
 	return (
-		<Flex gap='10'>
-			<Wrap>
-				{products.map(product => (
-					<WrapItem key={product.id}>
-						<ProductCard product={product} />
-					</WrapItem>
-				))}
-			</Wrap>
-		</Flex>
+		<>
+			{products ? (
+				<Flex gap='10'>
+					<Wrap>
+						{products.map(product => (
+							<WrapItem key={product.id}>
+								<ProductCard product={product} />
+							</WrapItem>
+						))}
+					</Wrap>
+				</Flex>
+			) : (
+				<span>Nothing was found</span>
+			)}
+		</>
 	);
 }
 
 export async function getStaticProps() {
 	try {
-		/* const apiURI = process.env.NEXT_PUBLIC_APP_URI;
+		const apiURI = process.env.NEXT_PUBLIC_APP_URI;
 		const res = await fetch(`${apiURI}/api/products`);
-		const { data } = await res.json(); */
+		const { data } = await res.json();
 		return {
-			props: { products: fakeDB.products },
+			props: { products: data},
 		};
 	} catch (error) {
 		console.error(error);
