@@ -5,17 +5,17 @@ DELETE  http://localhost:3000/api/products/642232172d37a1557df1443f
 
 ###
 
-POST http://localhost:3000/api/products
+POST https://flexzin-ecommerce.vercel.app/api/products
 content-type: application/json
 
 {
-	"title": "Sueter Flexzin",
-	"price": 43,
-	"salePrice": 27,
+	"title": "Camisa Flexzin",
+	"price": 33,
+	"salePrice": 15,
 	"rating": 10,
 	"qty": 1,
 	"currency": "USD",
 	"description": "Exclusivo",
-	"reviewsCount": 17,
-	"images":["https://i.postimg.cc/N0sgQQZy/270015105-129062612909899-193759229189531075-n.jpg"]
+	"reviewsCount": 23,
+	"images":["https://i.postimg.cc/g2qz9xtF/270155440-607693960536710-330534241042917093-n.jpg0"]
 }
