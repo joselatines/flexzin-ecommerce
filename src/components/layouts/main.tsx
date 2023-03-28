@@ -1,5 +1,6 @@
 import { Box, Flex } from '@chakra-ui/react';
 import Head from 'next/head';
+import Footer from '../shared/Footer';
 import Navigation from '../shared/Navigation';
 
 interface IProps {
@@ -35,7 +36,7 @@ export default function MainLayout({ children }: IProps) {
 
 				{/* Footer */}
 				<Box bg='blue.500' color='white' p={4}>
-					Footer
+					<Footer />
 				</Box>
 			</Flex>
 		</>
