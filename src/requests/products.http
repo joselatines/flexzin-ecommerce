@@ -9,13 +9,13 @@ POST https://flexzin-ecommerce.vercel.app/api/products
 content-type: application/json
 
 {
-	"title": "Camisa Flexzin",
-	"price": 33,
-	"salePrice": 15,
-	"rating": 10,
+	"title": "Camisa Bad Bunny",
+	"price": 43,
+	"salePrice": 23,
+	"rating": 6,
 	"qty": 1,
 	"currency": "USD",
-	"description": "Exclusivo",
-	"reviewsCount": 23,
-	"images":["https://i.postimg.cc/g2qz9xtF/270155440-607693960536710-330534241042917093-n.jpg0"]
+	"description": "Especial",
+	"reviewsCount": 10,
+	"images":["https://i.postimg.cc/prqky7DB/280300147-358138799715324-3230341352896785735-n.jpg"]
 }

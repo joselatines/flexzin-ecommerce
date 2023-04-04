@@ -76,7 +76,7 @@ function CartItem({ product, handleAdd, handleDelete }: any) {
 				<PriceTag price={salePrice * qty} currency={currency} />
 				<CloseButton
 					aria-label={`Delete ${title} from cart`}
-					onClick={() => handleDelete(product.id)}
+					onClick={() => handleDelete(product._id)}
 				/>
 			</Flex>
 
@@ -90,7 +90,7 @@ function CartItem({ product, handleAdd, handleDelete }: any) {
 			>
 				<CloseButton
 					aria-label={`Delete ${title} from cart`}
-					onClick={() => handleDelete(product.id)}
+					onClick={() => handleDelete(product._id)}
 				/>
 				<QuantitySelect
 					value={qty}

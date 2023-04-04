@@ -87,7 +87,7 @@ function ShoppingCartPage() {
 						<Stack spacing='6'>
 							{productsList.map((item: IProduct) => (
 								<CartItem
-									key={item.id}
+									key={item._id}
 									product={item}
 									handleAdd={handleAdd}
 									handleDelete={handleDelete}

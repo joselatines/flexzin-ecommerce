@@ -4,7 +4,7 @@ import mongoose from 'mongoose';
 
 interface IProduct {
 	title: string;
-	id: string;
+	_id: string;
 	price: number;
 	salePrice: number;
 	rating: number;
@@ -29,7 +29,7 @@ const ProductSchema = new mongoose.Schema<IProduct>({
 
 ProductSchema.set('toJSON', {
 	transform: (document, returnedObject) => {
-		returnedObject.id = returnedObject._id;
+		returnedObject._id = returnedObject._id;
 
 		delete returnedObject._id;
 		delete returnedObject.__v;

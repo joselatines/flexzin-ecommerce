@@ -35,7 +35,7 @@ export const CartProvider = ({ children }: { children: React.ReactNode }) => {
 
 	const addToCart = (product: Product, newQuantity?: number) => {
 		// If there is an existing product but no new quantity provided, increment the existing product's quantity by 1
-		const existingProductIndex = products.findIndex(p => p.id === product.id);
+		const existingProductIndex = products.findIndex(p => p._id === product._id);
 
 		// Get the existing product from the cart, if it exists
 		const existingProduct =
@@ -43,7 +43,6 @@ export const CartProvider = ({ children }: { children: React.ReactNode }) => {
 
 		let updatedProducts;
 		if (existingProduct && newQuantity !== undefined) {
-	
 			updatedProducts = [...products];
 			updatedProducts[existingProductIndex] = {
 				...existingProduct,
@@ -67,14 +66,14 @@ export const CartProvider = ({ children }: { children: React.ReactNode }) => {
 
 	const removeFromCart = (productId: string) => {
 		const existingProduct = products.find(
-			p => p.id.toString() === productId.toString()
+			p => p._id.toString() === productId.toString()
 		);
 
 		if (existingProduct) {
 			// Product in cart with quantity > 1 - just decrease the qty
 			if (existingProduct.qty > 1) {
 				const updatedProducts = products.map(p =>
-					p.id.toString() === productId.toString()
+					p._id.toString() === productId.toString()
 						? { ...p, qty: p.qty - 1 }
 						: p
 				);
@@ -83,7 +82,7 @@ export const CartProvider = ({ children }: { children: React.ReactNode }) => {
 			} else {
 				// Product in cart with quantity = 1 - remove it from the list
 				const newProducts = products.filter(
-					p => p.id.toString() !== productId.toString()
+					p => p._id.toString() !== productId.toString()
 				);
 				setProducts(newProducts);
 				localStorage.setItem('products', JSON.stringify(newProducts));

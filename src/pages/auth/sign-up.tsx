@@ -1,4 +1,3 @@
-import NextLink from 'next/link';
 import { useRouter } from 'next/router';
 import { ChangeEvent, useState } from 'react';
 import axios from 'axios';
@@ -162,7 +161,7 @@ function SignUpPage() {
 			<Box>
 				Ya tienes cuenta?{' '}
 				<Link color='teal.500'>
-					<NextLink href='/auth/login'>Login</NextLink>
+					<Link href='/auth/login'>Login</Link>
 				</Link>
 			</Box>
 		</Flex>

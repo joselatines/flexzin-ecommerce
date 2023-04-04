@@ -7,7 +7,7 @@ import mongoose from 'mongoose';
 import asyncEvery from '@/lib/utils/asyncEvery';
 
 async function checkPriceInDB(product: IProduct): Promise<boolean> {
-	const productDB = await Product.findById(product.id).lean().exec();
+	const productDB = await Product.findById(product._id).lean().exec();
 
 	if (!productDB) return false;
 
@@ -54,7 +54,7 @@ export default async function handler(
 
 				const total_usd = products.reduce(calculateTotal, 0);
 				const products_ids = products.map(
-					(product: IProduct) => new mongoose.Types.ObjectId(product.id)
+					(product: IProduct) => new mongoose.Types.ObjectId(product._id)
 				);
 
 				const newOrder = await Order.create({

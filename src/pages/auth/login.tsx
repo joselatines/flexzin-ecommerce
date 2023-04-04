@@ -1,4 +1,3 @@
-import NextLink from 'next/link';
 import { useRouter } from 'next/router';
 import { ChangeEvent, useState } from 'react';
 import axios from 'axios';
@@ -114,9 +113,9 @@ function LoginPage() {
 									/>
 								</InputGroup>
 								<FormHelperText textAlign='right'>
-									<NextLink href='/auth/forgotten-password'>
+									<Link href='/auth/forgotten-password'>
 										Olvidaste la contraseña?
-									</NextLink>
+									</Link>
 								</FormHelperText>
 							</FormControl>
 							<Button
@@ -136,7 +135,7 @@ function LoginPage() {
 			<Box>
 				Eres nuevo por aquí?{' '}
 				<Link color='teal.500'>
-					<NextLink href='/auth/sign-up'>Registrar</NextLink>
+					<Link href='/auth/sign-up'>Registrar</Link>
 				</Link>
 			</Box>
 		</Flex>

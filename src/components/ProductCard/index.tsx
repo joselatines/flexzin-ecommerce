@@ -29,7 +29,7 @@ export default function ProductCard({ product }: Props) {
 	useEffect(() => {
 		const checkLocalStorage = async () => {
 			const productsStored = await getProducts();
-			const isInLocalStorage = productsStored.some(p => p.id === product.id);
+			const isInLocalStorage = productsStored.some(p => p._id === product._id);
 			setIsInCart(isInLocalStorage);
 		};
 		checkLocalStorage();
@@ -37,7 +37,7 @@ export default function ProductCard({ product }: Props) {
 
 	const handleAddToCart = () => {
 		if (isInCart) {
-			removeFromCart(product.id);
+			removeFromCart(product._id);
 			setIsInCart(false);
 		} else {
 			addToCart(product);

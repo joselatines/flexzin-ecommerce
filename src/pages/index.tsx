@@ -14,7 +14,7 @@ export default function Home({ products }: IProps) {
 				<Flex gap='10'>
 					<Wrap>
 						{products.map(product => (
-							<WrapItem key={product.id}>
+							<WrapItem key={product._id}>
 								<ProductCard product={product} />
 							</WrapItem>
 						))}
@@ -33,7 +33,7 @@ export async function getStaticProps() {
 		const res = await fetch(`${apiURI}/api/products`);
 		const { data } = await res.json();
 		return {
-			props: { products: data},
+			props: { products: data },
 		};
 	} catch (error) {
 		console.error(error);
