@@ -5,7 +5,7 @@ function Footer() {
 		<Box as='footer' py={4}>
 			<Text textAlign='center' fontSize='sm'>
 				Hecho por{' '}
-				<Link href='https://github.com/joselatines' target='_blank'>
+				<Link href='https://joselatines.vercel.app' target='_blank'>
 					Jose Latines
 				</Link>
 			</Text>
