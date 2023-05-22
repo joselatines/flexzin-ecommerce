@@ -1,24 +1,59 @@
 import NextLink from 'next/link';
+import Cookies from 'js-cookie';
 import { useEffect, useState } from 'react';
-import { useRouter } from 'next/router';
-import { Button } from '@chakra-ui/react';
-import axios from 'axios';
+import { Button, Flex } from '@chakra-ui/react';
+import logout from '@/lib/utils/logout';
 import { useCustomToast } from '@/lib/hooks/useCustomToast';
+import { useRouter } from 'next/router';
 
+function SessionManager() {
+	const TOKEN_NAME = process.env.TOKEN_NAME || 'fullAccessFlexzin';
+	const [userData, setUserData] = useState({ email: '', username: '' });
+	const showToast = useCustomToast();
+	const router = useRouter();
 
-function SessionManager({ handleLogout, isLoggedIn, userData }: any) {
+	useEffect(() => {
+		const user = Cookies.get(TOKEN_NAME);
+
+		if (user) setUserData(JSON.parse(user.toString()));
+	}, [TOKEN_NAME]);
+
+	const handleLogout = async () => {
+		const res = await logout();
+
+		if (res.status === 200) {
+			showToast({
+				title: res.data.msg,
+				status: 'success',
+			});
+
+			setUserData({ email: '', username: '' });
+			router.push('/');
+			return;
+		}
+
+		showToast({
+			title: res.data.message,
+			status: 'error',
+		});
+	};
+
 	return (
-		<>
-			{isLoggedIn ? (
-				<Button onClick={handleLogout}>Cerrar sesión</Button>
+		<Flex gap='5'>
+			{userData.email.length > 0 ? (
+				<div>
+					<span>{userData.username}</span>
+					<Button marginX='5' onClick={handleLogout}>
+						Cerrar sesión
+					</Button>
+				</div>
 			) : (
-				<>
-					<NextLink href='/auth/sign-up'>Registrar</NextLink>
+				<Flex gap='5'>
 					<NextLink href='/auth/login'>Entrar</NextLink>
-				</>
+					<NextLink href='/auth/sign-up'>Registrar</NextLink>
+				</Flex>
 			)}
-			<span>{userData.email}</span>
-		</>
+		</Flex>
 	);
 }
 

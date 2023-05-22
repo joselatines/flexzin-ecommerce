@@ -82,7 +82,6 @@ export const CartProvider = ({ children }: { children: React.ReactNode }) => {
 	};
 
 	const getLengthProducts = () => {
-		console.log(products);
 		const totalProducts = products.reduce((accumulator, product) => {
 			return accumulator + product.qty;
 		}, 0);

@@ -47,8 +47,8 @@ function LoginPage() {
 					description: 'Enviado con éxito',
 					status: 'success',
 				});
-
-				router.push('/');
+				router.reload(); // Reload the current page
+				router.push('/'); // Navigate to the home page
 				return response.data.data;
 			}
 

@@ -1,3 +1,4 @@
+import NextLink from 'next/link';
 import CartItem from '@/components/CartPage/CartItem';
 import { CartOrderSummary } from '@/components/CartPage/CartOrderSummary';
 import { IProduct } from '@/database/models/Product';
@@ -12,6 +13,7 @@ import {
 	Link,
 	Stack,
 	useColorModeValue as mode,
+	Text,
 } from '@chakra-ui/react';
 import { useState, useEffect } from 'react';
 import { BsFillTrash3Fill } from 'react-icons/bs';
@@ -106,9 +108,9 @@ function ShoppingCartPage() {
 						<CartOrderSummary totalPrice={totalPrice} />
 						<HStack mt='6' fontWeight='semibold'>
 							<p>o</p>
-							<Link href='/' color={mode('blue.500', 'blue.200')}>
-								Volver a productos
-							</Link>
+							<NextLink href='/'>
+								<Text color='blue.500'>Volver a productos</Text>
+							</NextLink>
 						</HStack>
 					</Flex>
 				</Stack>

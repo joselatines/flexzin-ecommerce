@@ -10,6 +10,7 @@ import {
 } from '@chakra-ui/react';
 import { FaArrowRight } from 'react-icons/fa';
 import { formatPrice } from './PriceTag';
+import { useCart } from '@/lib/context/CartContext';
 
 type OrderSummaryItemProps = {
 	label: string;
@@ -31,7 +32,7 @@ const OrderSummaryItem = (props: OrderSummaryItemProps) => {
 
 export const CartOrderSummary = ({ totalPrice, shippingTax = 0 }: any) => {
 	const showToast = useCustomToast();
-
+	const { getLengthProducts } = useCart();
 	const handleCouponCode = () => {
 		showToast({
 			title: 'No disponible',
@@ -65,11 +66,13 @@ export const CartOrderSummary = ({ totalPrice, shippingTax = 0 }: any) => {
 					</Text>
 				</Flex>
 			</Stack>
-			<NextLink href='/cart/checking'>
-				<Button colorScheme='blue' fontSize='md' rightIcon={<FaArrowRight />}>
-					Comprar
-				</Button>
-			</NextLink>
+			{getLengthProducts() > 0 && (
+				<NextLink href='/cart/checking'>
+					<Button colorScheme='blue' fontSize='md' rightIcon={<FaArrowRight />}>
+						Comprar
+					</Button>
+				</NextLink>
+			)}
 		</Stack>
 	);
 };

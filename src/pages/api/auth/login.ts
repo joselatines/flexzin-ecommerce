@@ -49,7 +49,7 @@ export default async function loginHandler(
       token: token,
     };
 
-		console.log(userData)
+
     setCookie(SECRET, userData, { req, res, maxAge: tokenTime });
 
     return res.status(200).json({

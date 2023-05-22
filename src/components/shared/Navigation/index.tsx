@@ -6,6 +6,7 @@ import MenuLinks from './MenuLinks';
 import logo from '/public/images/logo.png';
 import MenuToggle from './MenuToggle';
 import ShoppingCart from '@/components/ShoppingCart';
+import SessionManager from './SessionManager';
 
 function Navigation() {
 	const isDesktop = useBreakpointValue({ md: false, lg: true });
@@ -21,6 +22,7 @@ function Navigation() {
 					<NextImage src={logo} alt='Logo Flexzin' width={100} height={100} />
 				</NextLink>
 				{/* <MenuLinks links={links} isOpen={isOpen} /> */}
+				<SessionManager />
 				<ShoppingCart />
 				{!isDesktop && <MenuToggle toggle={toggle} isOpen={isOpen} />}
 			</HStack>
