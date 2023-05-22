@@ -5,7 +5,7 @@ import { Box, Flex } from '@chakra-ui/react';
 
 function ShoppingCart() {
 	const { getLengthProducts } = useCart();
-
+	
 	return (
 		<NextLink href='/cart'>
 			<Flex align='center' justify='center'>

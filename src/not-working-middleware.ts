@@ -29,7 +29,7 @@ export async function middleware(request: any) {
 			jwt.value,
 			new TextEncoder().encode('secret')
 		);
-		console.log({ payload });
+		// console.log({ payload });
 		return NextResponse.next();
 	} catch (error) {
 		console.log({ error });
