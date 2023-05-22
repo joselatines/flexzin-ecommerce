@@ -68,38 +68,12 @@ export const CartProvider = ({ children }: { children: React.ReactNode }) => {
 	};
 
 	const removeFromCart = (productId: string) => {
-		const removeHoleItem = () => {
-			
-		}
-		const existingProduct = products.find(
-			p => p._id.toString() === productId.toString()
-		);
 		// Product in cart with quantity = 1 - remove it from the list
 		const newProducts = products.filter(
 			p => p._id.toString() !== productId.toString()
 		);
 		setProducts(newProducts);
 		localStorage.setItem('products', JSON.stringify(newProducts));
-		return;
-		if (existingProduct) {
-			// Product in cart with quantity > 1 - just decrease the qty
-			if (existingProduct.qty > 1) {
-				const updatedProducts = products.map(p =>
-					p._id.toString() === productId.toString()
-						? { ...p, qty: p.qty - 1 }
-						: p
-				);
-				setProducts(updatedProducts);
-				localStorage.setItem('products', JSON.stringify(updatedProducts));
-			} else {
-				// Product in cart with quantity = 1 - remove it from the list
-				const newProducts = products.filter(
-					p => p._id.toString() !== productId.toString()
-				);
-				setProducts(newProducts);
-				localStorage.setItem('products', JSON.stringify(newProducts));
-			}
-		}
 	};
 
 	const emptyCart = () => {
@@ -108,7 +82,7 @@ export const CartProvider = ({ children }: { children: React.ReactNode }) => {
 	};
 
 	const getLengthProducts = () => {
-		console.log(products)
+		console.log(products);
 		const totalProducts = products.reduce((accumulator, product) => {
 			return accumulator + product.qty;
 		}, 0);

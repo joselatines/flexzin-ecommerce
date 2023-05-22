@@ -1,3 +1,4 @@
+import NextLink from 'next/link';
 import { useRouter } from 'next/router';
 import { ChangeEvent, useState } from 'react';
 import axios from 'axios';
@@ -56,7 +57,7 @@ function LoginPage() {
 			// Handle error
 			console.error(error);
 			showToast({
-				title: error?.response?.data?.error || 'Orden NO enviada',
+				title: 'Orden NO enviada',
 				description: error?.response?.data?.msg || error?.message,
 				status: 'error',
 			});
@@ -71,9 +72,7 @@ function LoginPage() {
 	return (
 		<Flex
 			flexDirection='column'
-			width='100wh'
-			height='100vh'
-			backgroundColor='gray.200'
+			height='auto'
 			justifyContent='center'
 			alignItems='center'
 		>
@@ -83,8 +82,8 @@ function LoginPage() {
 				justifyContent='center'
 				alignItems='center'
 			>
-				<Avatar bg='teal.500' />
-				<Heading color='teal.400'>Welcome</Heading>
+				<Avatar bg='blue.500' />
+				<Heading color='blue.400'>Welcome</Heading>
 				<Box minW={{ base: '90%', md: '468px' }}>
 					<form>
 						<Stack
@@ -122,7 +121,7 @@ function LoginPage() {
 								borderRadius={0}
 								type='submit'
 								variant='solid'
-								colorScheme='teal'
+								colorScheme='blue'
 								width='full'
 								onClick={handleSubmit}
 							>
@@ -134,7 +133,7 @@ function LoginPage() {
 			</Stack>
 			<Box>
 				Eres nuevo por aquí?{' '}
-				<Link color='teal.500' href='/auth/sign-up'>
+				<Link color='blue.500' href='/auth/sign-up'>
 					Registrar
 				</Link>
 			</Box>

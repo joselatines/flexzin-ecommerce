@@ -9,8 +9,11 @@ export default function logoutHandler(
 	if (req.method !== 'GET') {
 		return res.status(405).json({ statusCode: 405, msg: 'Method Not Allowed' });
 	}
-	const myTokenName = req.cookies;
 
+	const TOKEN_NAME = process.env.TOKEN_NAME;
+
+	const myTokenName = req.cookies;
+	console.log(myTokenName);
 	const currentTokenName = process.env.TOKEN_NAME;
 
 	if (!myTokenName) {

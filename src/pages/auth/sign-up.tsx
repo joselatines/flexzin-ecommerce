@@ -91,8 +91,8 @@ function SignUpPage() {
 		<Flex
 			flexDirection='column'
 			width='100wh'
-			height='100vh'
-			backgroundColor='gray.200'
+			height='auto'
+		
 			justifyContent='center'
 			alignItems='center'
 		>
@@ -102,8 +102,8 @@ function SignUpPage() {
 				justifyContent='center'
 				alignItems='center'
 			>
-				<Avatar bg='teal.500' />
-				<Heading color='teal.400'>Bienvenido</Heading>
+				<Avatar bg='blue.500' />
+				<Heading color='blue.400'>Bienvenido</Heading>
 				<Box minW={{ base: '90%', md: '468px' }}>
 					<form>
 						<Stack
@@ -148,7 +148,7 @@ function SignUpPage() {
 								borderRadius={0}
 								type='submit'
 								variant='solid'
-								colorScheme='teal'
+								colorScheme='blue'
 								width='full'
 								onClick={handleSubmit}
 							>
@@ -160,7 +160,7 @@ function SignUpPage() {
 			</Stack>
 			<Box>
 				Ya tienes cuenta?{' '}
-				<Link color='teal.500' href='/auth/login'>
+				<Link color='blue.500' href='/auth/login'>
 					Login
 				</Link>
 			</Box>
