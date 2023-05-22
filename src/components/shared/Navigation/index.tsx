@@ -22,7 +22,7 @@ function Navigation() {
 					<NextImage src={logo} alt='Logo Flexzin' width={100} height={100} />
 				</NextLink>
 				{/* <MenuLinks links={links} isOpen={isOpen} /> */}
-				<SessionManager />
+				{/* 	<SessionManager /> */}
 				<ShoppingCart />
 			</HStack>
 		</Box>

@@ -30,7 +30,7 @@ export default function Home({ products }: IProps) {
 export async function getStaticProps() {
 	try {
 		const apiURI = process.env.NEXT_PUBLIC_APP_URI;
-		const res = await fetch(`${apiURI}/api/products`);
+		const res = await fetch(`/api/products`);
 		const { data } = await res.json();
 		return {
 			props: { products: data },
