@@ -9,6 +9,7 @@ interface CartContextValue {
 	removeFromCart: (productId: string) => void;
 	emptyCart: () => void;
 	getProducts: () => Product[];
+	getLengthProducts: () => number;
 }
 
 const CartContext = createContext<CartContextValue>({
@@ -17,6 +18,7 @@ const CartContext = createContext<CartContextValue>({
 	removeFromCart: (id: string) => {},
 	emptyCart: () => {},
 	getProducts: () => [],
+	getLengthProducts: () => 0,
 });
 
 export const useCart = () => useContext(CartContext);
@@ -42,7 +44,8 @@ export const CartProvider = ({ children }: { children: React.ReactNode }) => {
 			existingProductIndex !== -1 ? products[existingProductIndex] : undefined;
 
 		let updatedProducts;
-		if (existingProduct && newQuantity !== undefined) {
+		if (existingProduct && newQuantity) {
+			console;
 			updatedProducts = [...products];
 			updatedProducts[existingProductIndex] = {
 				...existingProduct,
@@ -95,12 +98,21 @@ export const CartProvider = ({ children }: { children: React.ReactNode }) => {
 		localStorage.removeItem('products');
 	};
 
+	const getLengthProducts = () => {
+		const totalProducts = products.reduce((accumulator, product) => {
+			return accumulator + product.qty;
+		}, 0);
+
+		return totalProducts;
+	};
+
 	const contextValue: CartContextValue = {
 		products,
 		addToCart,
 		removeFromCart,
 		emptyCart,
 		getProducts,
+		getLengthProducts,
 	};
 
 	return (

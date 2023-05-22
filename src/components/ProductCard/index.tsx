@@ -33,9 +33,10 @@ export default function ProductCard({ product }: Props) {
 			setIsInCart(isInLocalStorage);
 		};
 		checkLocalStorage();
-	}, [product, getProducts]);
+	}, []);
 
 	const handleAddToCart = () => {
+		console.log('handleAddToCart')
 		if (isInCart) {
 			removeFromCart(product._id);
 			setIsInCart(false);
