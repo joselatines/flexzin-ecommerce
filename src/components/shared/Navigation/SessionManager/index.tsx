@@ -39,7 +39,7 @@ function SessionManager() {
 	};
 
 	return (
-		<Flex gap='5'>
+		<Flex gap='5' textAlign='center'>
 			{userData.email.length > 0 ? (
 				<div>
 					<span>{userData.username}</span>

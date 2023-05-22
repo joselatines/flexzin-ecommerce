@@ -17,7 +17,7 @@ export default function MainLayout({ children }: IProps) {
 				<link rel='icon' href='/favicon.ico' />
 			</Head>
 
-			<Flex flexDirection='column' height='100vh'>
+			<Flex flexDirection='column' height='100vh' >
 				{/* Navbar */}
 
 				<Navigation />

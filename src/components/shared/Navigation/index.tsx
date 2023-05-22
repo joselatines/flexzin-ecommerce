@@ -24,7 +24,6 @@ function Navigation() {
 				{/* <MenuLinks links={links} isOpen={isOpen} /> */}
 				<SessionManager />
 				<ShoppingCart />
-				{!isDesktop && <MenuToggle toggle={toggle} isOpen={isOpen} />}
 			</HStack>
 		</Box>
 	);

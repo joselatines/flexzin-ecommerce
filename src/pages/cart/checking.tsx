@@ -6,12 +6,13 @@ import { useCustomToast } from '@/lib/hooks/useCustomToast';
 import { useCart } from '@/lib/context/CartContext';
 
 function CheckingPage() {
-	const { products } = useCart();
-	const cart = products;
+	const { getProducts } = useCart();
+
 	const showToast = useCustomToast();
 	const router = useRouter();
 
 	useEffect(() => {
+		const cart = getProducts();
 		if (!cart) {
 			showToast({
 				title: 'Agrega un artículo al carrito',
@@ -19,7 +20,7 @@ function CheckingPage() {
 			});
 			router.push('/cart');
 		}
-	}, []);
+	});
 
 	return (
 		<>
