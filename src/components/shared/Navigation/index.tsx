@@ -1,4 +1,5 @@
 import NextImage from 'next/image';
+import NextLink from 'next/link';
 import { Box, HStack, Link, useBreakpointValue } from '@chakra-ui/react';
 import { useState } from 'react';
 import MenuLinks from './MenuLinks';
@@ -16,9 +17,9 @@ function Navigation() {
 	return (
 		<Box as='nav' py={{ base: '4', lg: '5' }} px='8'>
 			<HStack spacing='10' justify='space-between'>
-				<Link href='/'>
+				<NextLink href='/'>
 					<NextImage src={logo} alt='Logo Flexzin' width={100} height={100} />
-				</Link>
+				</NextLink>
 				{/* <MenuLinks links={links} isOpen={isOpen} /> */}
 				<ShoppingCart />
 				{!isDesktop && <MenuToggle toggle={toggle} isOpen={isOpen} />}

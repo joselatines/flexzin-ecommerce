@@ -1,13 +1,14 @@
-import { Box, Text, Link } from '@chakra-ui/react';
+import NextLink from 'next/link';
+import { Box, Text } from '@chakra-ui/react';
 
 function Footer() {
 	return (
 		<Box as='footer' py={4}>
 			<Text textAlign='center' fontSize='sm'>
 				Hecho por{' '}
-				<Link href='https://joselatines.vercel.app' target='_blank'>
+				<NextLink href='https://joselatines.vercel.app' target='_blank'>
 					Jose Latines
-				</Link>
+				</NextLink>
 			</Text>
 		</Box>
 	);

@@ -113,9 +113,9 @@ function LoginPage() {
 									/>
 								</InputGroup>
 								<FormHelperText textAlign='right'>
-									<Link href='/auth/forgotten-password'>
+									<NextLink href='/auth/forgotten-password'>
 										Olvidaste la contraseña?
-									</Link>
+									</NextLink>
 								</FormHelperText>
 							</FormControl>
 							<Button
@@ -134,8 +134,8 @@ function LoginPage() {
 			</Stack>
 			<Box>
 				Eres nuevo por aquí?{' '}
-				<Link color='teal.500'>
-					<Link href='/auth/sign-up'>Registrar</Link>
+				<Link color='teal.500' href='/auth/sign-up'>
+					Registrar
 				</Link>
 			</Box>
 		</Flex>

@@ -1,4 +1,5 @@
-import { Box, Link, Stack, Text } from '@chakra-ui/react';
+import NextLink from 'next/link';
+import { Box, Stack, Text } from '@chakra-ui/react';
 import React from 'react';
 import SessionManager from '../SessionManager';
 
@@ -32,9 +33,9 @@ function MenuLinks({ links, isOpen }: IProps) {
 				top={['0', 'auto']}
 			>
 				{links.map(link => (
-					<Link href={link.href} key={link.href}>
+					<NextLink href={link.href} key={link.href}>
 						<Text display='block'>{link.content}</Text>
-					</Link>
+					</NextLink>
 				))}
 				{/* <SessionManager /> */}
 			</Stack>

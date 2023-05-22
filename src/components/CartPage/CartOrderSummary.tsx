@@ -1,9 +1,9 @@
+import NextLink from 'next/link';
 import { useCustomToast } from '@/lib/hooks/useCustomToast';
 import {
 	Button,
 	Flex,
 	Heading,
-	Link,
 	Stack,
 	Text,
 	useColorModeValue as mode,
@@ -65,11 +65,11 @@ export const CartOrderSummary = ({ totalPrice, shippingTax = 0 }: any) => {
 					</Text>
 				</Flex>
 			</Stack>
-			<Link href='/cart/checking' size='lg'>
+			<NextLink href='/cart/checking'>
 				<Button colorScheme='blue' fontSize='md' rightIcon={<FaArrowRight />}>
 					Comprar
 				</Button>
-			</Link>
+			</NextLink>
 		</Stack>
 	);
 };

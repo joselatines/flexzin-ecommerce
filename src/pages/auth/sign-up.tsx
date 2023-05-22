@@ -160,8 +160,8 @@ function SignUpPage() {
 			</Stack>
 			<Box>
 				Ya tienes cuenta?{' '}
-				<Link color='teal.500'>
-					<Link href='/auth/login'>Login</Link>
+				<Link color='teal.500' href='/auth/login'>
+					Login
 				</Link>
 			</Box>
 		</Flex>
