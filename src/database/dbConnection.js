@@ -20,6 +20,7 @@ if (!cached) {
 }
 
 async function dbConnect() {
+  console.log('trying to connect to db')
   if (cached.conn) {
     return cached.conn
   }
@@ -30,6 +31,8 @@ async function dbConnect() {
     }
 
     cached.promise = mongoose.connect(MONGO_URI, opts).then((mongoose) => {
+    console.log('connected')
+
       return mongoose
     })
   }
@@ -38,7 +41,7 @@ async function dbConnect() {
     cached.conn = await cached.promise
   } catch (e) {
     cached.promise = null
-    throw e
+    console.log(e)
   }
 
   return cached.conn

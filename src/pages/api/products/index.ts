@@ -9,8 +9,8 @@ export default async function handler(
 ) {
 	const { method, body } = req;
 
-	await dbConnect();
-
+	const db = await dbConnect();
+	console.log(db)
 	switch (method) {
 		case 'GET':
 			try {
