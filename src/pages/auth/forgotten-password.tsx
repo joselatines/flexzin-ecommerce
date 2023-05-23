@@ -2,12 +2,13 @@ import axios from 'axios';
 import { Button } from '@chakra-ui/react';
 import { useCustomToast } from '@/lib/hooks/useCustomToast';
 import { useRouter } from 'next/router';
-import {  useState } from 'react';
+import { useState } from 'react';
 
 function ForgottenPasswordPage() {
 	const showToast = useCustomToast();
 	const [email, setEmail] = useState('');
 	const router = useRouter();
+	const APP_URI = process.env.NEXT_PUBLIC_APP_URI;
 
 	const handleEmailChange = (e: any) => {
 		setEmail(e.target.value);
@@ -27,7 +28,8 @@ function ForgottenPasswordPage() {
 
 		try {
 			const response = await axios.post(
-				'/api/auth/forgotten-password',
+				`
+				${APP_URI}/api/auth/forgotten-password`,
 				request
 			);
 

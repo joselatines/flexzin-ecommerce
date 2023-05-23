@@ -30,9 +30,11 @@ export default function Home({ products }: IProps) {
 
 export async function getStaticProps() {
 	try {
-		const apiURI = process.env.NEXT_PUBLIC_APP_URI;
-		console.log(apiURI)
-		const res = await fetch(`https://flexzin-ecommerce.vercel.app/api/products`);
+		const APP_URI = process.env.NEXT_PUBLIC_APP_URI;
+		console.log(APP_URI)
+
+		
+		const res = await fetch(`${APP_URI}/api/products`);
 		const { data } = await res.json();
 
 		console.log(res);

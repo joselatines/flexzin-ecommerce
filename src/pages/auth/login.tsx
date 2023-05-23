@@ -20,9 +20,11 @@ import { useCustomToast } from '@/lib/hooks/useCustomToast';
 
 function LoginPage() {
 	const [inputs, setInputs] = useState({ email: '', password: '' });
-
+	const [isLoading, setIsLoading] = useState(false);
 	const showToast = useCustomToast();
 	const router = useRouter();
+const APP_URI = process.env.NEXT_PUBLIC_APP_URI;
+
 
 	const handleSubmit = async (e: any) => {
 		e.preventDefault();
@@ -39,7 +41,8 @@ function LoginPage() {
 		const request = inputs;
 
 		try {
-			const response = await axios.post('/api/auth/login', request);
+			setIsLoading(true);
+			const response = await axios.post(`${APP_URI}/api/auth/login`, request);
 
 			if (response.status === 200 && !response.data.error) {
 				showToast({
@@ -47,6 +50,7 @@ function LoginPage() {
 					description: 'Enviado con éxito',
 					status: 'success',
 				});
+
 				router.reload(); // Reload the current page
 				router.push('/'); // Navigate to the home page
 				return response.data.data;
@@ -61,6 +65,8 @@ function LoginPage() {
 				description: error?.response?.data?.msg || error?.message,
 				status: 'error',
 			});
+		} finally {
+			setIsLoading(false);
 		}
 	};
 
@@ -124,8 +130,9 @@ function LoginPage() {
 								colorScheme='blue'
 								width='full'
 								onClick={handleSubmit}
+								isLoading={isLoading}
 							>
-								Login
+								Iniciar sesión
 							</Button>
 						</Stack>
 					</form>

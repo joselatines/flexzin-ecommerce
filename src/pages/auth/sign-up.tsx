@@ -22,9 +22,12 @@ function SignUpPage() {
 		password: '',
 		username: '',
 	});
+	const [isLoading, setIsLoading] = useState(false);
 
 	const showToast = useCustomToast();
 	const router = useRouter();
+const APP_URI = process.env.NEXT_PUBLIC_APP_URI;
+
 
 	const handleSubmit = async (e: any) => {
 		e.preventDefault();
@@ -41,7 +44,8 @@ function SignUpPage() {
 		const request = inputs;
 
 		try {
-			const response = await axios.post('/api/auth/signup', request);
+			setIsLoading(true);
+			const response = await axios.post(`${APP_URI}/api/auth/signup`, request);
 
 			if (response.status !== 201) {
 				throw new Error('Something went wrong');
@@ -79,6 +83,8 @@ function SignUpPage() {
 				description: error.message,
 				status: 'error',
 			});
+		} finally {
+			setIsLoading(false);
 		}
 	};
 
@@ -92,7 +98,6 @@ function SignUpPage() {
 			flexDirection='column'
 			width='100wh'
 			height='auto'
-		
 			justifyContent='center'
 			alignItems='center'
 		>
@@ -151,6 +156,7 @@ function SignUpPage() {
 								colorScheme='blue'
 								width='full'
 								onClick={handleSubmit}
+								isLoading={isLoading}
 							>
 								Registrar
 							</Button>
