@@ -30,9 +30,17 @@ export default async function loginHandler(
     }
 
     const user = await User.findOne({ email }).exec();
-    const isPasswordValid = await bcrypt.compare(password, user.password);
+   
 
-    if (!user || !isPasswordValid) {
+    if (!user) {
+      return res.status(404).json({
+        error: 'Autentificación',
+        statusCode: 404,
+        msg: 'No hay un usuario con ese correo',
+      });
+    }
+    const isPasswordValid = await bcrypt.compare(password, user.password);
+    if (!isPasswordValid) {
       return res.status(401).json({
         error: 'Autentificación',
         statusCode: 401,
