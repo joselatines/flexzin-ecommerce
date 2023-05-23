@@ -10,7 +10,6 @@ export default async function handler(
 	const { method, body } = req;
 
 	const db = await dbConnect();
-	console.log(db)
 	switch (method) {
 		case 'GET':
 			try {
@@ -41,7 +40,6 @@ export default async function handler(
 				}
 
 				const newProduct = await Product.create(body);
-				console.log('newProduct: ', newProduct);
 
 				res.status(201).json({
 					statusCode: 201,

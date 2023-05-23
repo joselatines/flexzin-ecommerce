@@ -8,6 +8,7 @@ interface IProps {
 }
 
 export default function Home({ products }: IProps) {
+	console.log(products)
 	return (
 		<>
 			{products ? (
@@ -30,8 +31,11 @@ export default function Home({ products }: IProps) {
 export async function getStaticProps() {
 	try {
 		const apiURI = process.env.NEXT_PUBLIC_APP_URI;
-		const res = await fetch(`/api/products`);
+		console.log(apiURI)
+		const res = await fetch(`https://flexzin-ecommerce.vercel.app/api/products`);
 		const { data } = await res.json();
+
+		console.log(res);
 		return {
 			props: { products: data },
 		};

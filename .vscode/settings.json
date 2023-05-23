@@ -1,4 +1,5 @@
 {
 	"cSpell.language": "en,es-ES",
-	"cSpell.words": ["Flexzin", "signup"]
+	"cSpell.words": ["Flexzin", "signup"],
+	"typescript.tsdk": "node_modules\\typescript\\lib"
 }
